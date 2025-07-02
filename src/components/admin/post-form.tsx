@@ -43,13 +43,14 @@ const formSchema = z.object({
   newCategory: z.string().optional(),
 }).refine(data => {
     if (data.category === 'new_category') {
-        return !!data.newCategory && data.newCategory.length > 1;
+        return !!data.newCategory && data.newCategory.trim().length > 1;
     }
     return true;
 }, {
-    message: 'El nombre de la nueva categoría es requerido.',
+    message: 'El nombre de la nueva categoría es requerido y debe tener al menos 2 caracteres.',
     path: ['newCategory'],
 });
+
 
 interface PostFormProps {
   postToEdit?: Post;

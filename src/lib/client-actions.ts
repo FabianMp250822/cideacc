@@ -28,13 +28,22 @@ const createSlug = (title: string) => {
 
 // Zod Schema for Post Form
 const postSchema = z.object({
-  title: z.string().min(1, 'El título es requerido.').max(150, 'El título es muy largo.'),
-  excerpt: z.string().min(1, 'El extracto es requerido.').max(300, 'El extracto es muy largo.'),
-  content: z.string().min(1, 'El contenido es requerido.'),
+  title: z.string().min(2, 'El título debe tener al menos 2 caracteres.').max(150),
+  excerpt: z.string().min(10, 'El extracto debe tener al menos 10 caracteres.').max(300),
+  content: z.string().min(20, 'El contenido debe tener al menos 20 caracteres.'),
   status: z.enum(['draft', 'published']),
-  category: z.string().min(1, 'La categoría es requerida.'),
+  category: z.string().min(1, 'Debes seleccionar una categoría.'),
   newCategory: z.string().optional(),
+}).refine(data => {
+    if (data.category === 'new_category') {
+        return !!data.newCategory && data.newCategory.trim().length > 1;
+    }
+    return true;
+}, {
+    message: 'El nombre de la nueva categoría es requerido y debe tener al menos 2 caracteres.',
+    path: ['newCategory'],
 });
+
 
 // Zod Schema for Contact Form
 const contactSchema = z.object({
@@ -80,11 +89,11 @@ export async function createPost(formData: FormData) {
 
     let finalCategory = category;
     if (category === 'new_category' && newCategory) {
-      finalCategory = newCategory;
-      const categorySlug = createSlug(newCategory);
+      const trimmedCategory = newCategory.trim();
+      finalCategory = trimmedCategory;
+      const categorySlug = createSlug(trimmedCategory);
       const categoryRef = doc(db, 'categories', categorySlug);
-      // Use setDoc with merge: true to create or update the category document
-      await setDoc(categoryRef, { name: newCategory, slug: categorySlug }, { merge: true });
+      await setDoc(categoryRef, { name: trimmedCategory, slug: categorySlug }, { merge: true });
     }
     
     const postsCollection = collection(db, 'posts');
@@ -105,7 +114,7 @@ export async function createPost(formData: FormData) {
 
   } catch (error) {
     console.error("Error creating post: ", error);
-    throw new Error('No se pudo crear la publicación.');
+    throw error;
   }
 }
 
@@ -152,11 +161,11 @@ export async function updatePost(postId: string, formData: FormData) {
     
     let finalCategory = category;
     if (category === 'new_category' && newCategory) {
-      finalCategory = newCategory;
-      const categorySlug = createSlug(newCategory);
+      const trimmedCategory = newCategory.trim();
+      finalCategory = trimmedCategory;
+      const categorySlug = createSlug(trimmedCategory);
       const categoryRef = doc(db, 'categories', categorySlug);
-       // Use setDoc with merge: true to create or update the category document
-      await setDoc(categoryRef, { name: newCategory, slug: categorySlug }, { merge: true });
+      await setDoc(categoryRef, { name: trimmedCategory, slug: categorySlug }, { merge: true });
     }
     updateData.categories = [finalCategory];
 
@@ -164,7 +173,7 @@ export async function updatePost(postId: string, formData: FormData) {
 
   } catch (error) {
     console.error("Error updating post: ", error);
-    throw new Error('No se pudo actualizar la publicación.');
+    throw error;
   }
 }
 
