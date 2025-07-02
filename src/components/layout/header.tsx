@@ -40,15 +40,13 @@ export function Header() {
   return (
     <header className={cn('sticky top-0 z-50 w-full border-b transition-colors duration-300', isScrolled ? 'bg-background/80 backdrop-blur-sm' : 'bg-background')}>
       <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
-        <Link href="/" className="flex items-center gap-2">
+        <Link href="/" className="flex items-center">
           <Image
-            src="https://placehold.co/40x40.png"
+            src="https://i.ibb.co/SDrPcVcD/LOGO-CIDEACC-BLANCO-9c097083112aab88a977.png"
             alt="CIDEACC Logo"
-            width={35}
-            height={35}
-            data-ai-hint="heart circuit"
+            width={120}
+            height={40}
           />
-          <span className="font-bold text-lg text-primary">CIDEACC</span>
         </Link>
 
         <nav className="hidden items-center gap-6 md:flex">

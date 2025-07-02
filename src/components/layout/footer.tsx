@@ -21,15 +21,13 @@ export function Footer() {
       <div className="container mx-auto px-4 py-12 md:px-6">
         <div className="grid gap-12 md:grid-cols-3">
           <div className="flex flex-col space-y-4">
-            <Link href="/" className="flex items-center gap-2">
+            <Link href="/" className="flex items-center">
               <Image
-                src="https://placehold.co/40x40.png"
+                src="https://i.ibb.co/SDrPcVcD/LOGO-CIDEACC-BLANCO-9c097083112aab88a977.png"
                 alt="CIDEACC Logo"
-                width={35}
-                height={35}
-                data-ai-hint="heart circuit"
+                width={120}
+                height={40}
               />
-              <span className="font-bold text-lg text-primary">CIDEACC</span>
             </Link>
             <p className="max-w-xs text-sm text-muted-foreground">
               {t('footer.tagline')}

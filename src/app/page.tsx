@@ -54,12 +54,10 @@ export default function Home() {
             </div>
             <div className="flex items-center justify-center">
               <Image
-                src="https://placehold.co/300x300.png"
-                alt="CIDEACC Heart Logo"
-                width={300}
-                height={300}
-                className="rounded-lg"
-                data-ai-hint="heart circuit"
+                src="https://i.ibb.co/SDrPcVcD/LOGO-CIDEACC-BLANCO-9c097083112aab88a977.png"
+                alt="CIDEACC Logo"
+                width={400}
+                height={137}
                 priority
               />
             </div>
