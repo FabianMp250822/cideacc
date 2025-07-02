@@ -1,0 +1,163 @@
+{
+  "common": {
+    "learn_more": "Saber Más",
+    "get_in_touch": "Contáctanos",
+    "submit": "Enviar",
+    "loading": "Cargando..."
+  },
+  "navigation": {
+    "title": "Navegación",
+    "home": "Inicio",
+    "about": "Quiénes Somos",
+    "solutions": "Soluciones",
+    "impact": "Impacto",
+    "contact": "Contacto"
+  },
+  "homepage": {
+    "hero": {
+      "title": "Transformando la Salud con Inteligencia Artificial",
+      "subtitle": "CIDEACC es el laboratorio de IA médica de la Clínica de la Costa, dedicado a transformar digitalmente la salud mediante herramientas innovadoras de IA.",
+      "cta_solutions": "Explorar Soluciones",
+      "cta_contact": "Contáctanos"
+    },
+    "features": {
+      "section_title": "Nuestro Enfoque",
+      "title": "Pioneros en IA Médica",
+      "subtitle": "Integramos investigación aplicada, desarrollo de software y formación de talento para crear soluciones de IA de vanguardia que mejoran la atención al paciente y la eficiencia operativa.",
+      "ai": {
+        "title": "IA Generativa",
+        "description": "Estructuración de datos médicos, generación de resúmenes clínicos y consultas interactivas."
+      },
+      "impact": {
+        "title": "Impacto Medible",
+        "description": "Reducción de tiempos operativos, mejora en el acceso a información crítica y empoderamiento del personal médico."
+      },
+      "innovation": {
+        "title": "Innovación Aplicada",
+        "description": "Desarrollo de soluciones locales y de código abierto para garantizar la total privacidad y seguridad de los datos."
+      }
+    },
+    "cta_section": {
+      "title": "¿Listos para Revolucionar la Salud Juntos?",
+      "subtitle": "Únete a nuestra misión de traer el futuro de la medicina al presente.",
+      "cta": "Ponerse en Contacto"
+    }
+  },
+  "about": {
+    "title": "Sobre CIDEACC",
+    "subtitle": "Laboratorio de IA médica de la Clínica de la Costa.",
+    "mission": {
+      "title": "Nuestra Misión",
+      "text": "Transformar digitalmente la institución mediante herramientas de IA de última generación, integrando investigación aplicada, desarrollo de software y formación de talento."
+    },
+    "vision": {
+      "title": "Nuestra Visión",
+      "text": "Ser líderes en la aplicación de inteligencia artificial en el ámbito médico, mejorando la calidad de vida de nuestros pacientes y la eficiencia de nuestros procesos clínicos."
+    },
+    "values": {
+      "title": "Nuestros Valores",
+      "list": [
+        "Innovación",
+        "Colaboración",
+        "Ética",
+        "Excelencia",
+        "Privacidad de Datos"
+      ]
+    },
+    "history": {
+      "title": "Historia del Proyecto",
+      "text": "CIDEACC nace de la necesidad de modernizar y optimizar los procesos clínicos en la Clínica de la Costa. Desde nuestro inicio, nos hemos enfocado en desarrollar soluciones de IA prácticas y seguras que aborden directamente los desafíos de nuestro personal médico, impulsando una cultura de innovación continua."
+    },
+    "team": {
+      "title": "Conoce al Equipo",
+      "members": {
+        "mpa": "Líder de Proyectos de IA",
+        "kc": "Desarrolladora de IA",
+        "nf": "Desarrolladora de IA"
+      }
+    }
+  },
+  "solutions": {
+    "title": "Nuestras Soluciones",
+    "subtitle": "IA Generativa para empoderar a los profesionales médicos.",
+    "description": "CIDEACC ha desarrollado una solución integral de IA Generativa diseñada para abordar los desafíos centrales de la gestión de datos en la salud moderna. Nuestro sistema se implementa localmente con modelos de código abierto, garantizando privacidad total y control sobre la información sensible.",
+    "features": {
+      "data_structuring": {
+        "title": "Procesamiento de Datos no Estructurados",
+        "description": "Transformamos texto libre, PDFs y audios en datos médicos estructurados y utilizables, eliminando la entrada manual de datos."
+      },
+      "summarization": {
+        "title": "Resúmenes Clínicos Automáticos",
+        "description": "Nuestra IA genera resúmenes clínicos concisos y precisos, ahorrando tiempo valioso a los médicos."
+      },
+      "interactive_consultation": {
+        "title": "Interfaz de Consulta Interactiva",
+        "description": "Los médicos pueden interactuar con los datos de los pacientes a través de una interfaz de chat, haciendo preguntas complejas y recibiendo respuestas instantáneas."
+      },
+      "agentic_rag": {
+        "title": "Agentes Especializados y Agentic RAG",
+        "description": "Utilizamos técnicas avanzadas como Agentic RAG (Generación Aumentada por Recuperación) con agentes especializados para respuestas de alta precisión y conscientes del contexto."
+      }
+    },
+    "benefits": {
+      "title": "Beneficios Clave",
+      "list": {
+        "time_reduction": "Reducción drástica del tiempo de transcripción y revisión de datos.",
+        "efficiency": "Mayor eficiencia médica y mejor toma de decisiones.",
+        "copilots": "Creación de copilotos clínicos que asisten al personal en sus tareas diarias.",
+        "privacy": "Total privacidad y seguridad al usar modelos locales y de código abierto."
+      }
+    }
+  },
+  "impact": {
+    "title": "Impacto y Aprendizajes",
+    "subtitle": "Resultados medibles e ideas clave de nuestros proyectos.",
+    "ai_summary": {
+      "title": "Generar Resumen con IA",
+      "description": "Introduce un resumen de los proyectos e iniciativas de CIDEACC a continuación para generar un resumen conciso de sus impactos y aprendizajes clave. Esta herramienta utiliza IA para destilar los resultados más importantes.",
+      "placeholder": "Proporcione una descripción general de los proyectos...",
+      "button": "Generar Resumen",
+      "result_title": "Resumen Generado"
+    },
+    "organizational_results": {
+      "title": "Resultados Organizacionales",
+      "items": {
+        "time_reduction": "Reducción en los tiempos operativos de revisión de datos clínicos.",
+        "accessibility": "Mejora de la accesibilidad a información crítica para la toma de decisiones.",
+        "empowerment": "Empoderamiento del personal médico y administrativo con herramientas inteligentes."
+      }
+    },
+    "lessons_learned": {
+      "title": "Lecciones Aprendidas",
+      "items": {
+        "no_generic": "Evitar soluciones genéricas: la IA debe adaptarse a las necesidades clínicas específicas.",
+        "measure_accuracy": "La importancia de medir rigurosamente la precisión y utilidad de los modelos de IA.",
+        "gradual_progress": "El progreso gradual con IA bien alineada genera más valor y adopción que soluciones disruptivas pero mal integradas."
+      }
+    }
+  },
+  "contact": {
+    "title": "Contáctanos",
+    "subtitle": "Estamos aquí para ayudar. Envíanos un mensaje o contáctanos directamente.",
+    "form": {
+      "name": "Nombre Completo",
+      "email": "Correo Electrónico",
+      "message": "Mensaje",
+      "privacy": "Acepto la política de privacidad.",
+      "privacy_link": "política de privacidad",
+      "success_title": "¡Mensaje Enviado!",
+      "success_description": "Gracias por contactarnos. Nos pondremos en contacto contigo en breve.",
+      "error_title": "Error",
+      "error_description": "Hubo un problema al enviar tu mensaje. Por favor, inténtalo de nuevo."
+    },
+    "direct_info": "Información Directa"
+  },
+  "footer": {
+    "tagline": "Transformando digitalmente la salud con soluciones de IA innovadoras y seguras.",
+    "credits": {
+      "title": "Créditos",
+      "text": "Construido con pasión utilizando herramientas de código abierto y la colaboración de un gran equipo."
+    },
+    "all_rights_reserved": "Todos los derechos reservados."
+  }
+}

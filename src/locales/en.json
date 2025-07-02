@@ -1,0 +1,163 @@
+{
+  "common": {
+    "learn_more": "Learn More",
+    "get_in_touch": "Get in Touch",
+    "submit": "Submit",
+    "loading": "Loading..."
+  },
+  "navigation": {
+    "title": "Navigation",
+    "home": "Home",
+    "about": "About Us",
+    "solutions": "Solutions",
+    "impact": "Impact",
+    "contact": "Contact"
+  },
+  "homepage": {
+    "hero": {
+      "title": "Transforming Healthcare with Artificial Intelligence",
+      "subtitle": "CIDEACC is the medical AI laboratory of Clínica de la Costa, dedicated to digitally transforming healthcare through innovative AI tools.",
+      "cta_solutions": "Explore Solutions",
+      "cta_contact": "Contact Us"
+    },
+    "features": {
+      "section_title": "Our Focus",
+      "title": "Pioneering Medical AI",
+      "subtitle": "We integrate applied research, software development, and talent training to create cutting-edge AI solutions that improve patient care and operational efficiency.",
+      "ai": {
+        "title": "Generative AI",
+        "description": "Structuring medical data, generating clinical summaries, and enabling interactive consultations."
+      },
+      "impact": {
+        "title": "Measurable Impact",
+        "description": "Reducing operational times, improving access to critical information, and empowering medical staff."
+      },
+      "innovation": {
+        "title": "Applied Innovation",
+        "description": "Developing local, open-source solutions to ensure total data privacy and security."
+      }
+    },
+    "cta_section": {
+      "title": "Ready to Revolutionize Healthcare Together?",
+      "subtitle": "Join us in our mission to bring the future of medicine to the present.",
+      "cta": "Get in Touch"
+    }
+  },
+  "about": {
+    "title": "About CIDEACC",
+    "subtitle": "Medical AI Laboratory of Clínica de la Costa.",
+    "mission": {
+      "title": "Our Mission",
+      "text": "To digitally transform the institution through state-of-the-art AI tools, integrating applied research, software development, and talent training."
+    },
+    "vision": {
+      "title": "Our Vision",
+      "text": "To be leaders in the application of artificial intelligence in the medical field, improving the quality of life of our patients and the efficiency of our clinical processes."
+    },
+    "values": {
+      "title": "Our Values",
+      "list": [
+        "Innovation",
+        "Collaboration",
+        "Ethics",
+        "Excellence",
+        "Data Privacy"
+      ]
+    },
+    "history": {
+      "title": "Project History",
+      "text": "CIDEACC was born from the need to modernize and optimize clinical processes at Clínica de la Costa. Since our inception, we have focused on developing practical and secure AI solutions that directly address the challenges of our medical staff, promoting a culture of continuous innovation."
+    },
+    "team": {
+      "title": "Meet the Team",
+      "members": {
+        "mpa": "AI Project Leader",
+        "kc": "AI Developer",
+        "nf": "AI Developer"
+      }
+    }
+  },
+  "solutions": {
+    "title": "Our Solutions",
+    "subtitle": "Generative AI to empower medical professionals.",
+    "description": "CIDEACC has developed a comprehensive Generative AI solution designed to address the core challenges of modern healthcare data management. Our system is built locally with open-source models, ensuring total privacy and control over sensitive information.",
+    "features": {
+      "data_structuring": {
+        "title": "Unstructured Data Processing",
+        "description": "We transform free text, PDFs, and audio recordings into structured, usable medical data, eliminating manual data entry."
+      },
+      "summarization": {
+        "title": "Automatic Clinical Summaries",
+        "description": "Our AI generates concise and accurate clinical summaries, saving physicians valuable time."
+      },
+      "interactive_consultation": {
+        "title": "Interactive Chat Interface",
+        "description": "Physicians can interact with patient data through a chat interface, asking complex questions and receiving instant answers."
+      },
+      "agentic_rag": {
+        "title": "Specialized Agents & Agentic RAG",
+        "description": "We use advanced techniques like Agentic RAG (Retrieval-Augmented Generation) with specialized agents for highly accurate and context-aware responses."
+      }
+    },
+    "benefits": {
+      "title": "Key Benefits",
+      "list": {
+        "time_reduction": "Drastic reduction in transcription and data review time.",
+        "efficiency": "Increased medical efficiency and better decision-making.",
+        "copilots": "Creation of clinical copilots that assist staff in their daily tasks.",
+        "privacy": "Total privacy and security by using local, open-source models."
+      }
+    }
+  },
+  "impact": {
+    "title": "Impact and Learnings",
+    "subtitle": "Measurable results and key insights from our projects.",
+    "ai_summary": {
+      "title": "Generate AI-Powered Summary",
+      "description": "Enter an overview of CIDEACC's projects and initiatives below to generate a concise summary of their key impacts and learnings. This tool uses AI to distill the most important outcomes.",
+      "placeholder": "Provide an overview of the projects...",
+      "button": "Generate Summary",
+      "result_title": "Generated Summary"
+    },
+    "organizational_results": {
+      "title": "Organizational Results",
+      "items": {
+        "time_reduction": "Reduction in operational times for clinical data review.",
+        "accessibility": "Improved accessibility to critical information for decision-making.",
+        "empowerment": "Empowerment of medical and administrative staff with intelligent tools."
+      }
+    },
+    "lessons_learned": {
+      "title": "Lessons Learned",
+      "items": {
+        "no_generic": "Avoid generic solutions: AI must be tailored to specific clinical needs.",
+        "measure_accuracy": "The importance of rigorously measuring the accuracy and utility of AI models.",
+        "gradual_progress": "Gradual progress with well-aligned AI generates more value and adoption than disruptive but poorly integrated solutions."
+      }
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "We are here to help. Send us a message or contact us directly.",
+    "form": {
+      "name": "Full Name",
+      "email": "Email Address",
+      "message": "Message",
+      "privacy": "I accept the privacy policy.",
+      "privacy_link": "privacy policy",
+      "success_title": "Message Sent!",
+      "success_description": "Thank you for contacting us. We will get back to you shortly.",
+      "error_title": "Error",
+      "error_description": "There was a problem sending your message. Please try again."
+    },
+    "direct_info": "Direct Information"
+  },
+  "footer": {
+    "tagline": "Digitally transforming healthcare with innovative and secure AI solutions.",
+    "credits": {
+      "title": "Credits",
+      "text": "Built with passion using open-source tools and the collaboration of a great team."
+    },
+    "all_rights_reserved": "All rights reserved."
+  }
+}
