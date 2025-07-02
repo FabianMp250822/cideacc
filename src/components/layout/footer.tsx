@@ -22,9 +22,10 @@ export function Footer() {
   ];
 
   return (
-    <footer className="bg-primary text-primary-foreground">
+    <footer className="bg-secondary text-secondary-foreground">
       <div className="container mx-auto px-4 py-12 md:px-6">
-        <div className="grid gap-12 md:grid-cols-3">
+        <div className="grid gap-12 lg:grid-cols-3 lg:gap-8">
+          {/* Logo and Tagline */}
           <div className="flex flex-col space-y-4">
             <Link href="/" className="flex items-center">
               <Image
@@ -34,18 +35,19 @@ export function Footer() {
                 height={40}
               />
             </Link>
-            <p className="max-w-xs text-sm text-primary-foreground/70">
+            <p className="max-w-xs text-sm text-muted-foreground">
               {t('footer.tagline')}
             </p>
           </div>
 
+          {/* Links Grid */}
           <div className="grid gap-8 sm:grid-cols-2 md:col-span-2 md:grid-cols-3">
             <div>
-              <h3 className="font-headline text-lg font-semibold">{t('navigation.title')}</h3>
+              <h3 className="font-headline text-lg font-semibold text-foreground">{t('navigation.title')}</h3>
               <ul className="mt-4 space-y-2">
                 {navLinks.map((link) => (
                   <li key={link.href}>
-                    <Link href={link.href} className="text-sm text-primary-foreground/70 hover:text-primary-foreground">
+                    <Link href={link.href} className="text-sm text-muted-foreground transition-colors hover:text-foreground">
                       {link.label}
                     </Link>
                   </li>
@@ -53,35 +55,37 @@ export function Footer() {
               </ul>
             </div>
             <div>
-              <h3 className="font-headline text-lg font-semibold">{t('contact.title')}</h3>
+              <h3 className="font-headline text-lg font-semibold text-foreground">{t('contact.direct_info')}</h3>
               <ul className="mt-4 space-y-3 text-sm">
-                <li className="flex items-center gap-2">
-                  <Mail className="h-4 w-4 text-accent" />
-                  <a href="mailto:maroca@clinicadelacosta.co" className="text-primary-foreground/70 hover:text-primary-foreground">
+                <li className="flex items-center gap-3">
+                  <Mail className="h-4 w-4 text-primary" />
+                  <a href="mailto:maroca@clinicadelacosta.co" className="text-muted-foreground transition-colors hover:text-foreground">
                     maroca@clinicadelacosta.co
                   </a>
                 </li>
-                <li className="flex items-center gap-2">
-                  <Phone className="h-4 w-4 text-accent" />
-                  <span className="text-primary-foreground/70">+57 320 801 5489</span>
+                <li className="flex items-center gap-3">
+                  <Phone className="h-4 w-4 text-primary" />
+                  <span className="text-muted-foreground">+57 320 801 5489</span>
                 </li>
-                <li className="flex items-center gap-2">
-                  <Globe className="h-4 w-4 text-accent" />
-                  <a href="https://cideacc.org" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/70 hover:text-primary-foreground">
+                <li className="flex items-center gap-3">
+                  <Globe className="h-4 w-4 text-primary" />
+                  <a href="https://cideacc.org" target="_blank" rel="noopener noreferrer" className="text-muted-foreground transition-colors hover:text-foreground">
                     cideacc.org
                   </a>
                 </li>
               </ul>
             </div>
              <div>
-              <h3 className="font-headline text-lg font-semibold">{t('footer.credits.title')}</h3>
-               <p className="mt-4 text-sm text-primary-foreground/70">
+              <h3 className="font-headline text-lg font-semibold text-foreground">{t('footer.credits.title')}</h3>
+               <p className="mt-4 text-sm text-muted-foreground">
                 {t('footer.credits.text')}
               </p>
             </div>
           </div>
         </div>
-        <div className="mt-8 border-t border-primary-foreground/20 pt-6 text-center text-sm text-primary-foreground/70">
+        
+        {/* Copyright */}
+        <div className="mt-12 border-t border-border pt-8 text-center text-sm text-muted-foreground">
           <p>&copy; {year} CIDEACC. {t('footer.all_rights_reserved')}</p>
         </div>
       </div>
