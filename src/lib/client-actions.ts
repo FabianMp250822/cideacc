@@ -11,7 +11,7 @@ import {
   setDoc,
   updateDoc,
 } from 'firebase/firestore';
-import { deleteObject, getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { deleteObject, getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { z } from 'zod';
 
 import { auth, db, storage } from '@/lib/firebase';
@@ -35,33 +35,49 @@ const contactSchema = z.object({
 
 // Step 1: Manage Category
 export async function manageCategory(category: string, newCategory?: string): Promise<string> {
-  if (category === 'new_category' && newCategory) {
-    const trimmedCategory = newCategory.trim();
-    if (trimmedCategory.length < 2) {
+  const trimmedNewCategory = newCategory?.trim();
+  if (category === 'new_category' && trimmedNewCategory) {
+    if (trimmedNewCategory.length < 2) {
       throw new Error('El nombre de la nueva categoría debe tener al menos 2 caracteres.');
     }
-    const categorySlug = createSlug(trimmedCategory);
+    const categorySlug = createSlug(trimmedNewCategory);
     const categoryRef = doc(db, 'categories', categorySlug);
-    await setDoc(categoryRef, { name: trimmedCategory, slug: categorySlug }, { merge: true });
-    return trimmedCategory;
+    await setDoc(categoryRef, { name: trimmedNewCategory, slug: categorySlug }, { merge: true });
+    return trimmedNewCategory;
   }
   return category;
 }
 
-// Step 2: Upload Image
-export async function uploadImage(image: File): Promise<string> {
-  if (!auth.currentUser) {
-    throw new Error('Usuario no autenticado para subir imagen.');
-  }
-  const storageRef = ref(storage, `posts/${Date.now()}_${image.name}`);
-  try {
-    await uploadBytes(storageRef, image);
-    const downloadURL = await getDownloadURL(storageRef);
-    return downloadURL;
-  } catch (error) {
-    console.error("Firebase Storage upload error: ", error);
-    throw new Error("Error al subir la imagen. Revisa la configuración de Firebase Storage y los permisos de CORS.");
-  }
+// Step 2: Upload Image with Progress
+export function uploadImage(image: File, onProgress: (progress: number) => void): Promise<string> {
+  return new Promise((resolve, reject) => {
+    if (!auth.currentUser) {
+      return reject(new Error('Usuario no autenticado para subir imagen.'));
+    }
+    const storageRef = ref(storage, `posts/${Date.now()}_${image.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, image);
+
+    uploadTask.on(
+      'state_changed',
+      (snapshot) => {
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        onProgress(progress);
+      },
+      (error) => {
+        console.error("Firebase Storage upload error: ", error);
+        reject(new Error("Error al subir la imagen. Revisa la configuración de Firebase Storage y los permisos de CORS."));
+      },
+      async () => {
+        try {
+          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+          resolve(downloadURL);
+        } catch (error) {
+           console.error("Error getting download URL: ", error);
+          reject(new Error("No se pudo obtener la URL de descarga de la imagen."));
+        }
+      }
+    );
+  });
 }
 
 // Step 3: Create Post Document in Firestore

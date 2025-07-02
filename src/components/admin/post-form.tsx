@@ -40,6 +40,7 @@ import Image from 'next/image';
 import type { Post } from '@/types';
 import { collection, onSnapshot, serverTimestamp } from 'firebase/firestore';
 import { cn } from '@/lib/utils';
+import { Progress } from '@/components/ui/progress';
 
 const formSchema = z.object({
   title: z.string().min(2, 'El título debe tener al menos 2 caracteres.').max(150),
@@ -70,6 +71,7 @@ export function PostForm({ postToEdit }: PostFormProps) {
   const [categories, setCategories] = useState<{ id: string; name: string }[]>([]);
   const [showNewCategory, setShowNewCategory] = useState(false);
   const [imagePreview, setImagePreview] = useState<string | null>(postToEdit?.featuredImageUrl || null);
+  const [uploadProgress, setUploadProgress] = useState<number | null>(null);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -117,6 +119,7 @@ export function PostForm({ postToEdit }: PostFormProps) {
     }
 
     setIsLoading(true);
+    setUploadProgress(null);
     let uploadedImageUrl: string | null = null;
 
     const showToast = (title: string, description?: string, variant?: 'default' | 'destructive') => {
@@ -140,18 +143,20 @@ export function PostForm({ postToEdit }: PostFormProps) {
       
       // Step 3: Upload Image if provided
       if (imageFile) {
+        setUploadProgress(0);
         showToast('Paso 3/4: Subiendo imagen destacada...');
-        // If editing an existing post with a featured image, delete the old one first.
         if (postToEdit?.featuredImageUrl) {
             await deleteImage(postToEdit.featuredImageUrl);
         }
-        finalImageUrl = await uploadImage(imageFile);
-        uploadedImageUrl = finalImageUrl; // Keep track for potential rollback
+        finalImageUrl = await uploadImage(imageFile, (progress) => {
+            setUploadProgress(progress);
+        });
+        uploadedImageUrl = finalImageUrl;
+        setUploadProgress(100);
         showToast('Paso 3/4: Imagen subida correctamente ✓');
       }
 
       if (!finalImageUrl) {
-        // This case should now only be reachable if something went wrong during upload
         throw new Error('No se pudo obtener la URL de la imagen destacada.');
       }
 
@@ -197,7 +202,6 @@ export function PostForm({ postToEdit }: PostFormProps) {
         error instanceof Error ? error.message : 'Ocurrió un error inesperado.',
         'destructive'
       );
-      // Rollback: If an image was uploaded in THIS attempt, delete it.
       if (uploadedImageUrl) {
         showToast('Revirtiendo subida de imagen...');
         await deleteImage(uploadedImageUrl);
@@ -205,6 +209,7 @@ export function PostForm({ postToEdit }: PostFormProps) {
       }
     } finally {
       setIsLoading(false);
+      setUploadProgress(null);
     }
   }
 
@@ -223,7 +228,7 @@ export function PostForm({ postToEdit }: PostFormProps) {
                     <FormItem>
                       <FormLabel>Título de la Publicación</FormLabel>
                       <FormControl>
-                        <Input placeholder="Ej: Avances en IA para Diagnóstico" {...field} />
+                        <Input placeholder="Ej: Avances en IA para Diagnóstico" {...field} disabled={isLoading} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -236,7 +241,7 @@ export function PostForm({ postToEdit }: PostFormProps) {
                     <FormItem>
                       <FormLabel>Extracto / Resumen</FormLabel>
                       <FormControl>
-                        <Textarea placeholder="Un breve resumen que aparecerá en las miniaturas..." {...field} />
+                        <Textarea placeholder="Un breve resumen que aparecerá en las miniaturas..." {...field} disabled={isLoading}/>
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -252,7 +257,7 @@ export function PostForm({ postToEdit }: PostFormProps) {
                         Puedes usar Markdown para formatear el texto. Para una experiencia de edición avanzada, se puede integrar un Editor de Texto Enriquecido.
                       </FormDescription>
                       <FormControl>
-                        <Textarea placeholder="Escribe el contenido completo del artículo aquí..." {...field} rows={15} />
+                        <Textarea placeholder="Escribe el contenido completo del artículo aquí..." {...field} rows={15} disabled={isLoading}/>
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -271,7 +276,7 @@ export function PostForm({ postToEdit }: PostFormProps) {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Estado</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <Select onValueChange={field.onChange} defaultValue={field.value} disabled={isLoading}>
                         <FormControl>
                           <SelectTrigger><SelectValue placeholder="Selecciona un estado" /></SelectTrigger>
                         </FormControl>
@@ -293,7 +298,7 @@ export function PostForm({ postToEdit }: PostFormProps) {
                       <Select onValueChange={(value) => {
                         field.onChange(value);
                         setShowNewCategory(value === 'new_category');
-                      }} defaultValue={field.value}>
+                      }} defaultValue={field.value} disabled={isLoading}>
                         <FormControl>
                             <SelectTrigger><SelectValue placeholder="Selecciona una categoría" /></SelectTrigger>
                         </FormControl>
@@ -316,7 +321,7 @@ export function PostForm({ postToEdit }: PostFormProps) {
                         <FormItem>
                             <FormLabel>Nombre de la Nueva Categoría</FormLabel>
                             <FormControl>
-                                <Input placeholder="Ej: Ética en IA" {...field} />
+                                <Input placeholder="Ej: Ética en IA" {...field} disabled={isLoading} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -337,10 +342,18 @@ export function PostForm({ postToEdit }: PostFormProps) {
                             )}
                         </FormLabel>
                         <FormControl>
-                            <Input id="featuredImage" type="file" accept="image/*" className="sr-only" onChange={handleImageChange} />
+                            <Input id="featuredImage" type="file" accept="image/*" className="sr-only" onChange={handleImageChange} disabled={isLoading} />
                         </FormControl>
                         <FormMessage />
                     </FormItem>
+                     {uploadProgress !== null && (
+                        <div className="mt-4 space-y-2">
+                            <Progress value={uploadProgress} className="w-full" />
+                            <p className="text-sm text-muted-foreground text-center">
+                                {uploadProgress < 100 ? `Subiendo: ${Math.round(uploadProgress)}%` : 'Subida completada'}
+                            </p>
+                        </div>
+                    )}
                 </CardContent>
             </Card>
           </div>
