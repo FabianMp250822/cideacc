@@ -17,7 +17,15 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { useState, useEffect } from 'react';
-import { createPost, updatePost } from '@/lib/client-actions';
+import {
+  manageCategory,
+  uploadImage,
+  createPostDocument,
+  updatePostDocument,
+  deleteImage,
+  createSlug,
+} from '@/lib/client-actions';
+import { auth, db } from '@/lib/firebase';
 import { Loader2 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
@@ -30,8 +38,7 @@ import {
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import type { Post } from '@/types';
-import { collection, onSnapshot } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
+import { collection, onSnapshot, serverTimestamp } from 'firebase/firestore';
 import { cn } from '@/lib/utils';
 
 const formSchema = z.object({
@@ -97,35 +104,93 @@ export function PostForm({ postToEdit }: PostFormProps) {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
-    const formData = new FormData();
-    Object.entries(values).forEach(([key, value]) => {
-      if (value) formData.append(key, value);
-    });
+    let uploadedImageUrl: string | null = null;
 
-    const imageInput = document.getElementById('featuredImage') as HTMLInputElement;
-    if (imageInput?.files?.[0]) {
-      formData.append('featuredImage', imageInput.files[0]);
-    } else if (!postToEdit) {
-      toast({ variant: 'destructive', title: 'Error', description: 'La imagen destacada es requerida.' });
-      setIsLoading(false);
-      return;
-    }
+    const showToast = (title: string, description?: string, variant?: 'default' | 'destructive') => {
+        toast({ title, description, variant });
+    };
 
     try {
-      if (postToEdit) {
-        await updatePost(postToEdit.id, formData);
-        toast({ title: '¡Éxito!', description: 'Publicación actualizada correctamente.' });
-      } else {
-        await createPost(formData);
-        toast({ title: '¡Éxito!', description: 'Publicación creada correctamente.' });
+      // Step 1: Check authentication
+      showToast('Paso 1/4: Verificando autenticación...');
+      if (!auth.currentUser) {
+        throw new Error('Debes iniciar sesión para realizar esta acción.');
       }
+      showToast('Paso 1/4: Autenticación verificada ✓');
+
+      // Step 2: Manage Category
+      showToast('Paso 2/4: Gestionando categoría...');
+      const finalCategory = await manageCategory(values.category, values.newCategory);
+      showToast('Paso 2/4: Categoría procesada ✓');
+
+      let finalImageUrl = postToEdit?.featuredImageUrl || '';
+      const imageInput = document.getElementById('featuredImage') as HTMLInputElement;
+      const imageFile = imageInput?.files?.[0];
+
+      // Step 3: Upload Image if provided
+      if (imageFile) {
+        showToast('Paso 3/4: Subiendo imagen destacada...');
+        // If editing an existing post with a featured image, delete the old one first.
+        if (postToEdit?.featuredImageUrl) {
+            await deleteImage(postToEdit.featuredImageUrl);
+        }
+        finalImageUrl = await uploadImage(imageFile);
+        uploadedImageUrl = finalImageUrl; // Keep track for potential rollback
+        showToast('Paso 3/4: Imagen subida correctamente ✓');
+      }
+
+      if (!finalImageUrl) {
+        throw new Error('La imagen destacada es requerida.');
+      }
+
+      // Step 4: Save post data to Firestore
+      showToast('Paso 4/4: Guardando datos de la publicación...');
+      const slug = createSlug(values.title);
+      const postData = {
+        title: values.title,
+        slug,
+        excerpt: values.excerpt,
+        content: values.content,
+        featuredImageUrl: finalImageUrl,
+        status: values.status,
+        categories: [finalCategory],
+        updatedAt: serverTimestamp(),
+      };
+      
+      if (postToEdit) {
+        await updatePostDocument(postToEdit.id, postData);
+      } else {
+        const createData = {
+            ...postData,
+            viewsCount: 0,
+            likesCount: 0,
+            authorId: auth.currentUser.uid,
+            createdAt: serverTimestamp(),
+        }
+        await createPostDocument(createData);
+      }
+      showToast('Paso 4/4: Publicación guardada en la base de datos ✓');
+
+      showToast(
+        '¡Proceso completado!',
+        postToEdit ? 'Publicación actualizada correctamente.' : 'Publicación creada correctamente.',
+        'default'
+      );
+      
       router.push('/admin/dashboard');
+
     } catch (error) {
-      toast({
-        variant: 'destructive',
-        title: 'Error',
-        description: error instanceof Error ? error.message : 'Ocurrió un error inesperado.',
-      });
+      showToast(
+        '¡Error en el proceso!',
+        error instanceof Error ? error.message : 'Ocurrió un error inesperado.',
+        'destructive'
+      );
+      // Rollback: If an image was uploaded in THIS attempt, delete it.
+      if (uploadedImageUrl) {
+        showToast('Revirtiendo subida de imagen...');
+        await deleteImage(uploadedImageUrl);
+        showToast('Reversión completada.');
+      }
     } finally {
       setIsLoading(false);
     }
