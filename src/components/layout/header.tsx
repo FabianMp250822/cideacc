@@ -2,12 +2,13 @@
 
 import { useLocalization } from '@/hooks/use-localization';
 import { cn } from '@/lib/utils';
-import { BrainCircuit, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { LanguageSwitcher } from '../language-switcher';
 import { Button } from '../ui/button';
+import Image from 'next/image';
 
 export function Header() {
   const { t } = useLocalization();
@@ -39,9 +40,14 @@ export function Header() {
   return (
     <header className={cn('sticky top-0 z-50 w-full border-b transition-colors duration-300', isScrolled ? 'bg-background/80 backdrop-blur-sm' : 'bg-background')}>
       <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
-        <Link href="/" className="flex items-center gap-2 font-headline text-xl font-bold text-primary">
-          <BrainCircuit className="h-7 w-7" />
-          <span>CIDEACC</span>
+        <Link href="/" className="flex items-center gap-2">
+          <Image
+            src="https://i.ibb.co/SDrPcVcD/LOGO-CIDEACC-BLANCO-9c097083112aab88a977.png"
+            alt="CIDEACC Logo"
+            width={150}
+            height={35}
+            className="invert dark:invert-0"
+          />
         </Link>
 
         <nav className="hidden items-center gap-6 md:flex">

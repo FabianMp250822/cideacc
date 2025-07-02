@@ -1,8 +1,9 @@
 'use client';
 
 import { useLocalization } from '@/hooks/use-localization';
-import { BrainCircuit, Mail, Phone, Globe } from 'lucide-react';
+import { Mail, Phone, Globe } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export function Footer() {
   const { t } = useLocalization();
@@ -21,8 +22,13 @@ export function Footer() {
         <div className="grid gap-12 md:grid-cols-3">
           <div className="flex flex-col space-y-4">
             <Link href="/" className="flex items-center gap-2">
-              <BrainCircuit className="h-8 w-8 text-primary" />
-              <span className="font-headline text-2xl font-bold">CIDEACC</span>
+              <Image
+                src="https://i.ibb.co/SDrPcVcD/LOGO-CIDEACC-BLANCO-9c097083112aab88a977.png"
+                alt="CIDEACC Logo"
+                width={150}
+                height={35}
+                className="invert dark:invert-0"
+              />
             </Link>
             <p className="max-w-xs text-sm text-muted-foreground">
               {t('footer.tagline')}

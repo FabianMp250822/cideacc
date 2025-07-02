@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useLocalization } from '@/hooks/use-localization';
 import { ArrowRight, BrainCircuit, HeartPulse, Lightbulb } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Home() {
   const { t } = useLocalization();
@@ -52,7 +53,14 @@ export default function Home() {
               </div>
             </div>
             <div className="flex items-center justify-center">
-              <BrainCircuit className="h-48 w-48 text-primary/80 animate-pulse" />
+              <Image
+                src="https://i.ibb.co/SDrPcVcD/LOGO-CIDEACC-BLANCO-9c097083112aab88a977.png"
+                alt="CIDEACC Logo"
+                width={250}
+                height={60}
+                className="invert dark:invert-0 animate-pulse"
+                priority
+              />
             </div>
           </div>
         </div>
