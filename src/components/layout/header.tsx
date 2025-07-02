@@ -14,7 +14,6 @@ export function Header() {
   const { t } = useLocalization();
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
 
   const navLinks = [
     { href: '/', label: t('navigation.home') },
@@ -25,22 +24,13 @@ export function Header() {
   ];
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  useEffect(() => {
     setIsMenuOpen(false);
   }, [pathname]);
 
 
   return (
     <header className={cn(
-      'sticky top-0 z-50 w-full border-b transition-colors duration-300', 
-      isScrolled ? 'bg-background/80 backdrop-blur-sm' : 'bg-background'
+      'sticky top-0 z-50 w-full border-b bg-primary text-primary-foreground border-primary/20'
     )}>
       <div className="container mx-auto flex h-20 items-center justify-between px-4 md:px-6">
         <Link href="/" className="flex items-center">
@@ -49,7 +39,7 @@ export function Header() {
             alt="CIDEACC Logo"
             width={150}
             height={50}
-            className="invert dark:invert-0"
+            className="dark:invert"
           />
         </Link>
 
@@ -59,8 +49,8 @@ export function Header() {
               key={link.href}
               href={link.href}
               className={cn(
-                'text-sm font-medium transition-colors hover:text-primary',
-                pathname === link.href ? 'text-primary' : 'text-muted-foreground'
+                'text-sm font-medium transition-colors hover:text-primary-foreground',
+                pathname === link.href ? 'text-primary-foreground' : 'text-primary-foreground/70'
               )}
             >
               {link.label}
