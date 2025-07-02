@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://cideacc.org/</loc>
+    <lastmod>2024-07-30</lastmod>
+    <priority>1.00</priority>
+  </url>
+  <url>
+    <loc>https://cideacc.org/about</loc>
+    <lastmod>2024-07-30</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://cideacc.org/solutions</loc>
+    <lastmod>2024-07-30</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://cideacc.org/impact</loc>
+    <lastmod>2024-07-30</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://cideacc.org/contact</loc>
+    <lastmod>2024-07-30</lastmod>
+    <priority>0.80</priority>
+  </url>
+</urlset>

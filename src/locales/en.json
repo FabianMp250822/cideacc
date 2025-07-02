@@ -158,9 +158,8 @@
   "footer": {
     "tagline": "Digitally transforming healthcare with innovative and secure AI solutions.",
     "credits": {
-      "title": "Credits",
-      "developer": "Developer",
-      "designer": "Designer"
+      "developer": "Developed by",
+      "designer": "Designed by"
     },
     "all_rights_reserved": "All rights reserved.",
     "developed_by": "Developed by Tecnosalud Internacional SAS"

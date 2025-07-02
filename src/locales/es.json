@@ -158,9 +158,8 @@
   "footer": {
     "tagline": "Transformando digitalmente la salud con soluciones de IA innovadoras y seguras.",
     "credits": {
-      "title": "Créditos",
-      "developer": "Desarrollador",
-      "designer": "Diseñadora"
+      "developer": "Desarrollado por",
+      "designer": "Diseñado por"
     },
     "all_rights_reserved": "Todos los derechos reservados.",
     "developed_by": "Desarrollado por Tecnosalud Internacional SAS"

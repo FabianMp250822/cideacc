@@ -20,9 +20,33 @@ const fontHeadline = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: 'CIDEACC - Laboratorio de IA Médica',
+  metadataBase: new URL('https://cideacc.org'),
+  title: 'CIDEACC - Laboratorio de IA para Innovación en Salud',
   description:
-    'Transformando la salud con inteligencia artificial. CIDEACC es el laboratorio de IA médica de la Clínica de la Costa.',
+    'CIDEACC, el laboratorio de IA médica de la Clínica de la Costa, lidera la transformación de la salud con inteligencia artificial. Descubre nuestras soluciones.',
+  keywords: ['IA en salud', 'inteligencia artificial médica', 'CIDEACC', 'Clínica de la Costa', 'innovación en salud', 'diagnóstico por IA', 'agentic rag', 'procesamiento de lenguaje natural'],
+  openGraph: {
+    title: 'CIDEACC - Laboratorio de IA para Innovación en Salud',
+    description: 'Transformando la salud con inteligencia artificial. Descubre nuestras soluciones en CIDEACC.',
+    url: 'https://cideacc.org',
+    siteName: 'CIDEACC',
+    images: [
+      {
+        url: 'https://i.ibb.co/SDrPcVcD/LOGO-CIDEACC-BLANCO-9c097083112aab88a977.png',
+        width: 1200,
+        height: 630,
+        alt: 'Logo de CIDEACC',
+      },
+    ],
+    locale: 'es_CO',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'CIDEACC - Laboratorio de IA para Innovación en Salud',
+    description: 'CIDEACC lidera la transformación de la salud con inteligencia artificial.',
+    images: ['https://i.ibb.co/SDrPcVcD/LOGO-CIDEACC-BLANCO-9c097083112aab88a977.png'],
+  },
 };
 
 export default function RootLayout({

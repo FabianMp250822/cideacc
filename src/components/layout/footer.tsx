@@ -41,7 +41,7 @@ export function Footer() {
           </div>
 
           {/* Links Grid */}
-          <div className="grid gap-8 sm:grid-cols-2 md:col-span-2 md:grid-cols-3">
+          <div className="grid gap-8 sm:grid-cols-2 md:col-span-2 md:grid-cols-2">
             <div>
               <h3 className="font-headline text-lg font-semibold text-foreground">{t('navigation.title')}</h3>
               <ul className="mt-4 space-y-2">
@@ -75,23 +75,15 @@ export function Footer() {
                 </li>
               </ul>
             </div>
-             <div>
-              <h3 className="font-headline text-lg font-semibold text-foreground">{t('footer.credits.title')}</h3>
-               <ul className="mt-4 space-y-2 text-sm">
-                <li className="text-muted-foreground">
-                  {t('footer.credits.developer')}: Fabian Muñoz Puello
-                </li>
-                <li className="text-muted-foreground">
-                  {t('footer.credits.designer')}: Leidy Vega Anaya
-                </li>
-              </ul>
-            </div>
           </div>
         </div>
         
-        {/* Copyright */}
+        {/* Copyright & Credits */}
         <div className="mt-12 border-t border-border/50 pt-8 text-center text-sm text-muted-foreground space-y-2">
-          <p>&copy; {year} CIDEACC. {t('footer.all_rights_reserved')}</p>
+          <p>&copy; {year ? year : new Date().getFullYear()} CIDEACC. {t('footer.all_rights_reserved')}</p>
+          <p>
+            {t('footer.credits.developer')} Fabian Muñoz Puello | {t('footer.credits.designer')} Leidy Vega Anaya
+          </p>
           <p>{t('footer.developed_by')}</p>
         </div>
       </div>
