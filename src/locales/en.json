@@ -1,7 +1,7 @@
 {
   "common": {
     "learn_more": "Learn More",
-    "get_in_touch": "Get in Touch",
+    "get_in_touch": "CONTACT",
     "submit": "Submit",
     "loading": "Loading..."
   },
@@ -15,10 +15,13 @@
   },
   "homepage": {
     "hero": {
-      "title": "Transforming Healthcare with Artificial Intelligence",
-      "subtitle": "CIDEACC is the medical AI laboratory of Clínica de la Costa, dedicated to digitally transforming healthcare through innovative AI tools.",
-      "cta_solutions": "Explore Solutions",
-      "cta_contact": "Contact Us"
+      "badge": "INNOVATION IN HEALTH",
+      "title_part1": "Transforming Medicine",
+      "title_part2": "with Artificial Intelligence",
+      "subtitle": "At CIDEACC, a division of the Clínica de la Costa Clinical Research Center founded in 2022, we lead the integration of artificial intelligence in healthcare to improve medical attention, diagnosis, and disease treatment. Our purpose is to revolutionize medicine through research and the development of innovative solutions, positively impacting people's quality of life.",
+      "feature1": "Cutting-edge research in medical AI",
+      "feature2": "Personalized solutions for patients",
+      "feature3": "Collaboration with health experts"
     },
     "features": {
       "section_title": "Our Focus",

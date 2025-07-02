@@ -1,7 +1,7 @@
 {
   "common": {
     "learn_more": "Saber Más",
-    "get_in_touch": "Contáctanos",
+    "get_in_touch": "CONTACTAR",
     "submit": "Enviar",
     "loading": "Cargando..."
   },
@@ -15,10 +15,13 @@
   },
   "homepage": {
     "hero": {
-      "title": "Transformando la Salud con Inteligencia Artificial",
-      "subtitle": "CIDEACC es el laboratorio de IA médica de la Clínica de la Costa, dedicado a transformar digitalmente la salud mediante herramientas innovadoras de IA.",
-      "cta_solutions": "Explorar Soluciones",
-      "cta_contact": "Contáctanos"
+      "badge": "INNOVACIÓN EN SALUD",
+      "title_part1": "Transformando la Medicina",
+      "title_part2": "con Inteligencia Artificial",
+      "subtitle": "En CIDEACC, una división del Centro de Investigación Clínica de la Costa fundada en 2022, lideramos la integración de la inteligencia artificial en la salud para mejorar la atención médica, el diagnóstico y el tratamiento de enfermedades. Nuestro propósito es revolucionar la medicina a través de la investigación y el desarrollo de soluciones innovadoras, impactando positivamente en la calidad de vida de las personas.",
+      "feature1": "Investigación de vanguardia en IA médica",
+      "feature2": "Soluciones personalizadas para pacientes",
+      "feature3": "Colaboración con expertos en salud"
     },
     "features": {
       "section_title": "Nuestro Enfoque",

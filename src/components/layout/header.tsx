@@ -2,7 +2,7 @@
 
 import { useLocalization } from '@/hooks/use-localization';
 import { cn } from '@/lib/utils';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
@@ -38,14 +38,14 @@ export function Header() {
 
 
   return (
-    <header className={cn('sticky top-0 z-50 w-full border-b transition-colors duration-300', isScrolled ? 'bg-background/80 backdrop-blur-sm' : 'bg-background')}>
-      <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
+    <header className={cn('sticky top-0 z-50 w-full border-b border-white/10 transition-colors duration-300', isScrolled ? 'bg-background/80 backdrop-blur-sm' : 'bg-transparent')}>
+      <div className="container mx-auto flex h-20 items-center justify-between px-4 md:px-6">
         <Link href="/" className="flex items-center">
           <Image
             src="https://i.ibb.co/SDrPcVcD/LOGO-CIDEACC-BLANCO-9c097083112aab88a977.png"
             alt="CIDEACC Logo"
-            width={120}
-            height={40}
+            width={150}
+            height={50}
           />
         </Link>
 
@@ -66,8 +66,11 @@ export function Header() {
 
         <div className="hidden items-center gap-2 md:flex">
           <LanguageSwitcher />
-          <Button asChild className="bg-accent hover:bg-accent/90">
-             <Link href="/contact">{t('common.get_in_touch')}</Link>
+          <Button asChild className="bg-accent hover:bg-accent/90 rounded-full">
+             <Link href="/contact">
+              {t('common.get_in_touch')}
+              <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
           </Button>
         </div>
 
@@ -94,8 +97,11 @@ export function Header() {
               </Link>
             ))}
             <LanguageSwitcher />
-            <Button asChild className="w-full bg-accent hover:bg-accent/90">
-                <Link href="/contact">{t('common.get_in_touch')}</Link>
+            <Button asChild className="w-full bg-accent hover:bg-accent/90 rounded-full">
+                <Link href="/contact">
+                  {t('common.get_in_touch')}
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
             </Button>
           </nav>
         </div>
