@@ -12,7 +12,10 @@
     "solutions": "Solutions",
     "impact": "Impact",
     "blog": "Blog",
-    "contact": "Contact"
+    "contact": "Contact",
+    "login": "Login",
+    "logout": "Logout",
+    "admin": "Admin Panel"
   },
   "homepage": {
     "hero": {
@@ -155,6 +158,31 @@
       "error_description": "There was a problem sending your message. Please try again."
     },
     "direct_info": "Direct Information"
+  },
+  "login": {
+    "title": "Admin Login",
+    "subtitle": "Access the content management panel.",
+    "button": "Login",
+    "form": {
+        "email": "Email Address",
+        "password": "Password",
+        "email_invalid": "Please enter a valid email.",
+        "password_length": "Password must be at least 6 characters.",
+        "error_title": "Login Failed",
+        "error_description": "Invalid credentials. Please try again."
+    }
+  },
+  "admin": {
+    "dashboard": {
+        "title": "Admin Dashboard",
+        "subtitle": "Welcome,"
+    },
+    "manage_posts": {
+        "title": "Manage Blog Posts",
+        "description": "Here you can create, edit, and delete blog posts.",
+        "new_post": "New Post",
+        "no_posts": "There are no posts yet. Create the first one!"
+    }
   },
   "blog": {
     "title": "Blog",

@@ -2,20 +2,23 @@
 
 import { useLocalization } from '@/hooks/use-localization';
 import { cn } from '@/lib/utils';
-import { Menu, X, ArrowRight } from 'lucide-react';
+import { Menu, X, ArrowRight, LogOut, LayoutDashboard } from 'lucide-react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { LanguageSwitcher } from '../language-switcher';
 import { Button } from '../ui/button';
 import Image from 'next/image';
-import { useTheme } from 'next-themes';
+import { useAuth } from '@/hooks/use-auth';
+import { signOut } from 'firebase/auth';
+import { auth } from '@/lib/firebase';
 
 export function Header() {
   const { t } = useLocalization();
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { theme } = useTheme();
+  const { user, loading } = useAuth();
+  const router = useRouter();
   const [isMounted, setIsMounted] = useState(false);
 
   const navLinks = [
@@ -34,8 +37,25 @@ export function Header() {
     setIsMenuOpen(false);
   }, [pathname]);
 
+  const handleLogout = async () => {
+    await signOut(auth);
+    router.push('/');
+  };
+
   if (!isMounted) {
-    return null; 
+    return (
+       <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-sm border-border">
+          <div className="container mx-auto flex h-20 items-center justify-between px-4 md:px-6">
+             <div className="h-8 w-36 bg-muted/50 rounded-md animate-pulse" />
+             <div className="hidden md:flex items-center gap-4">
+                <div className="h-6 w-20 bg-muted/50 rounded-md animate-pulse" />
+                <div className="h-6 w-20 bg-muted/50 rounded-md animate-pulse" />
+                <div className="h-6 w-20 bg-muted/50 rounded-md animate-pulse" />
+             </div>
+             <div className="h-10 w-24 bg-muted/50 rounded-full animate-pulse" />
+          </div>
+       </header>
+    )
   }
 
   return (
@@ -58,8 +78,8 @@ export function Header() {
               key={link.href}
               href={link.href}
               className={cn(
-                'text-sm font-medium transition-colors hover:text-foreground',
-                pathname === link.href ? 'text-foreground' : 'text-muted-foreground'
+                'text-sm font-medium transition-colors hover:text-primary',
+                pathname === link.href ? 'text-primary' : 'text-muted-foreground'
               )}
             >
               {link.label}
@@ -69,12 +89,31 @@ export function Header() {
 
         <div className="hidden items-center gap-2 md:flex">
           <LanguageSwitcher />
-          <Button asChild className="bg-accent hover:bg-accent/90 text-accent-foreground rounded-full">
-             <Link href="/contact">
-              {t('navigation.contact')}
-              <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-          </Button>
+           {!loading && (
+            <>
+              {user ? (
+                <div className='flex gap-2'>
+                   <Button asChild variant="outline" className="rounded-full">
+                     <Link href="/admin/dashboard">
+                      <LayoutDashboard className="mr-2 h-4 w-4" />
+                       {t('navigation.admin')}
+                      </Link>
+                  </Button>
+                  <Button onClick={handleLogout} variant="destructive" className="rounded-full">
+                    <LogOut className="mr-2 h-4 w-4" />
+                    {t('navigation.logout')}
+                  </Button>
+                </div>
+              ) : (
+                <Button asChild className="bg-accent hover:bg-accent/90 text-accent-foreground rounded-full">
+                  <Link href="/contact">
+                    {t('navigation.contact')}
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              )}
+            </>
+          )}
         </div>
 
         <div className="md:hidden">
@@ -109,12 +148,31 @@ export function Header() {
                 {t('navigation.contact')}
               </Link>
             <LanguageSwitcher />
-            <Button asChild className="w-full bg-accent hover:bg-accent/90 text-accent-foreground rounded-full">
-                <Link href="/contact">
-                  {t('common.get_in_touch')}
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-            </Button>
+            {!loading && (
+              <>
+                {user ? (
+                  <div className='w-full flex flex-col gap-4'>
+                    <Button asChild className="w-full">
+                      <Link href="/admin/dashboard">
+                        <LayoutDashboard className="mr-2 h-4 w-4" />
+                        {t('navigation.admin')}
+                      </Link>
+                    </Button>
+                    <Button onClick={handleLogout} variant="destructive" className="w-full">
+                       <LogOut className="mr-2 h-4 w-4" />
+                       {t('navigation.logout')}
+                    </Button>
+                  </div>
+                ) : (
+                   <Button asChild className="w-full bg-accent hover:bg-accent/90 text-accent-foreground rounded-full">
+                      <Link href="/contact">
+                        {t('common.get_in_touch')}
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                        </Link>
+                  </Button>
+                )}
+              </>
+            )}
           </nav>
         </div>
       )}

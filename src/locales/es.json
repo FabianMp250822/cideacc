@@ -12,7 +12,10 @@
     "solutions": "Soluciones",
     "impact": "Impacto",
     "blog": "Blog",
-    "contact": "Contacto"
+    "contact": "Contacto",
+    "login": "Login",
+    "logout": "Cerrar Sesión",
+    "admin": "Panel Admin"
   },
   "homepage": {
     "hero": {
@@ -155,6 +158,31 @@
       "error_description": "Hubo un problema al enviar tu mensaje. Por favor, inténtalo de nuevo."
     },
     "direct_info": "Información Directa"
+  },
+  "login": {
+    "title": "Login de Administrador",
+    "subtitle": "Accede al panel de gestión de contenido.",
+    "button": "Iniciar Sesión",
+    "form": {
+        "email": "Correo Electrónico",
+        "password": "Contraseña",
+        "email_invalid": "Por favor, introduce un email válido.",
+        "password_length": "La contraseña debe tener al menos 6 caracteres.",
+        "error_title": "Fallo de Autenticación",
+        "error_description": "Credenciales inválidas. Por favor, inténtalo de nuevo."
+    }
+  },
+  "admin": {
+    "dashboard": {
+        "title": "Panel de Administración",
+        "subtitle": "Bienvenido,"
+    },
+    "manage_posts": {
+        "title": "Gestionar Publicaciones",
+        "description": "Aquí puedes crear, editar y eliminar las publicaciones del blog.",
+        "new_post": "Nueva Publicación",
+        "no_posts": "Aún no hay publicaciones. ¡Crea la primera!"
+    }
   },
   "blog": {
     "title": "Blog",
