@@ -1,4 +1,7 @@
-'use server';
+// IMPORTANT: This file has been modified to use a mix of client-side functions
+// and server-side actions. Write operations (create, update, delete) are now
+// client-side functions to ensure they run with the user's auth context.
+// Read operations remain as Server Actions for SEO and performance.
 
 import {
   addDoc,
@@ -18,6 +21,9 @@ import { z } from 'zod';
 
 import { db, storage } from '@/lib/firebase';
 import type { Post } from '@/types';
+import { auth } from '@/lib/firebase';
+import { summarizeImpactAndLearnings } from '@/ai/flows/summarize-impact-and-learnings';
+
 
 // Helper function to create a slug from a title
 const createSlug = (title: string) => {
@@ -39,16 +45,30 @@ const postSchema = z.object({
   newCategory: z.string().optional(),
 });
 
-// Function to upload image to Firebase Storage
+// Zod Schema for Contact Form
+const contactSchema = z.object({
+  name: z.string().min(2),
+  email: z.string().email(),
+  message: z.string().min(10),
+});
+
+// Function to upload image to Firebase Storage (Client-side)
 async function uploadImage(image: File): Promise<string> {
+  if (!auth.currentUser) {
+    throw new Error('Usuario no autenticado.');
+  }
   const storageRef = ref(storage, `posts/${Date.now()}_${image.name}`);
   await uploadBytes(storageRef, image);
   const downloadURL = await getDownloadURL(storageRef);
   return downloadURL;
 }
 
-// CREATE POST ACTION
+// CREATE POST ACTION (Client-side)
 export async function createPost(formData: FormData) {
+  if (!auth.currentUser) {
+    throw new Error('Debes iniciar sesión para crear una publicación.');
+  }
+
   const data = Object.fromEntries(formData);
   const validatedFields = postSchema.safeParse(data);
 
@@ -91,6 +111,7 @@ export async function createPost(formData: FormData) {
       updatedAt: serverTimestamp(),
       viewsCount: 0,
       likesCount: 0,
+      authorId: auth.currentUser.uid,
     });
 
   } catch (error) {
@@ -99,8 +120,12 @@ export async function createPost(formData: FormData) {
   }
 }
 
-// UPDATE POST ACTION
+// UPDATE POST ACTION (Client-side)
 export async function updatePost(postId: string, formData: FormData) {
+  if (!auth.currentUser) {
+    throw new Error('Debes iniciar sesión para actualizar una publicación.');
+  }
+  
   const data = Object.fromEntries(formData);
   const validatedFields = postSchema.safeParse(data);
 
@@ -123,7 +148,16 @@ export async function updatePost(postId: string, formData: FormData) {
     };
 
     if (image && image.size > 0) {
-        // Here you might want to delete the old image from storage
+        const postSnap = await getDoc(postRef);
+        const oldImageUrl = postSnap.data()?.featuredImageUrl;
+        if (oldImageUrl) {
+            try {
+                const oldImageRef = ref(storage, oldImageUrl);
+                await deleteObject(oldImageRef);
+            } catch (err: any) {
+                if (err.code !== 'storage/object-not-found') console.error("Could not delete old image", err);
+            }
+        }
         updateData.featuredImageUrl = await uploadImage(image);
     }
     
@@ -147,13 +181,15 @@ export async function updatePost(postId: string, formData: FormData) {
   }
 }
 
-// DELETE POST ACTION
+// DELETE POST ACTION (Client-side)
 export async function deletePost(postId: string, imageUrl?: string) {
+   if (!auth.currentUser) {
+    throw new Error('Debes iniciar sesión para eliminar una publicación.');
+  }
   try {
     if (imageUrl) {
       const imageRef = ref(storage, imageUrl);
       await deleteObject(imageRef).catch(error => {
-        // Don't throw if image not found, just log it
         if(error.code !== 'storage/object-not-found') {
             console.error("Error deleting image:", error);
         }
@@ -166,8 +202,9 @@ export async function deletePost(postId: string, imageUrl?: string) {
   }
 }
 
-// GET PUBLISHED POSTS for the blog feed
+// GET PUBLISHED POSTS for the blog feed (Server Action)
 export async function getPublishedPosts(): Promise<Post[]> {
+  'use server';
   const postsCollection = collection(db, 'posts');
   const q = query(postsCollection, where('status', '==', 'published'), limit(20));
   const querySnapshot = await getDocs(q);
@@ -178,8 +215,9 @@ export async function getPublishedPosts(): Promise<Post[]> {
   return posts;
 }
 
-// GET POST BY SLUG for the blog detail page
+// GET POST BY SLUG for the blog detail page (Server Action)
 export async function getPostBySlug(slug: string): Promise<Post | null> {
+  'use server';
   const postsCollection = collection(db, 'posts');
   const q = query(postsCollection, where('slug', '==', slug), limit(1));
   const querySnapshot = await getDocs(q);
@@ -188,4 +226,22 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
   }
   const docSnap = querySnapshot.docs[0];
   return { id: docSnap.id, ...docSnap.data() } as Post;
+}
+
+// SEND CONTACT MESSAGE (Client-side)
+export async function sendContactMessage(data: z.infer<typeof contactSchema>) {
+  const validatedFields = contactSchema.safeParse(data);
+  if (!validatedFields.success) {
+    throw new Error('Datos de contacto inválidos.');
+  }
+  // This would ideally write to a 'contacts' collection in Firestore,
+  // but that would require different security rules for unauthenticated users.
+  // For now, we just log it.
+  console.log('Contact message received:', validatedFields.data);
+}
+
+// GENERATE IMPACT SUMMARY (Server Action)
+export async function generateImpactSummary(input: { projectOverview: string; }) {
+  'use server';
+  return await summarizeImpactAndLearnings(input);
 }
