@@ -8,6 +8,7 @@ import {
   doc,
   getDoc,
   serverTimestamp,
+  setDoc,
   updateDoc,
 } from 'firebase/firestore';
 import { deleteObject, getDownloadURL, ref, uploadBytes } from 'firebase/storage';
@@ -82,10 +83,8 @@ export async function createPost(formData: FormData) {
       finalCategory = newCategory;
       const categorySlug = createSlug(newCategory);
       const categoryRef = doc(db, 'categories', categorySlug);
-      const categorySnap = await getDoc(categoryRef);
-      if (!categorySnap.exists()) {
-        await updateDoc(categoryRef, { name: newCategory, slug: categorySlug }, { merge: true });
-      }
+      // Use setDoc with merge: true to create or update the category document
+      await setDoc(categoryRef, { name: newCategory, slug: categorySlug }, { merge: true });
     }
     
     const postsCollection = collection(db, 'posts');
@@ -156,10 +155,8 @@ export async function updatePost(postId: string, formData: FormData) {
       finalCategory = newCategory;
       const categorySlug = createSlug(newCategory);
       const categoryRef = doc(db, 'categories', categorySlug);
-       const categorySnap = await getDoc(categoryRef);
-      if (!categorySnap.exists()) {
-        await updateDoc(categoryRef, { name: newCategory, slug: categorySlug }, { merge: true });
-      }
+       // Use setDoc with merge: true to create or update the category document
+      await setDoc(categoryRef, { name: newCategory, slug: categorySlug }, { merge: true });
     }
     updateData.categories = [finalCategory];
 
