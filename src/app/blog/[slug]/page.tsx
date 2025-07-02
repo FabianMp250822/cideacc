@@ -1,5 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { ArrowLeft, Calendar } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { ArrowLeft, ArrowRight, Calendar } from "lucide-react";
 import type { Metadata, ResolvingMetadata } from 'next';
 import Image from "next/image";
 import Link from "next/link";
@@ -108,6 +110,10 @@ export default async function BlogPostPage({ params }: Props) {
     )
   }
 
+  const recommendedPosts = posts
+    .filter(p => p.slug !== params.slug)
+    .slice(0, 2);
+
   return (
     <div className="container mx-auto px-4 py-16 md:px-6 md:py-24 lg:py-32">
         <article className="max-w-4xl mx-auto">
@@ -149,6 +155,53 @@ export default async function BlogPostPage({ params }: Props) {
                 dangerouslySetInnerHTML={{ __html: post.content }}
             />
         </article>
+        
+        {recommendedPosts.length > 0 && (
+            <section className="mt-24 border-t border-border/50 pt-16 animate-fade-in">
+                <h2 className="text-center font-headline text-3xl font-bold text-foreground mb-12">
+                    También te podría interesar
+                </h2>
+                <div className="grid gap-12 lg:grid-cols-2 max-w-4xl mx-auto">
+                    {recommendedPosts.map((recommendedPost) => (
+                        <Card key={recommendedPost.slug} className="flex flex-col bg-card shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+                             <Image
+                                src={recommendedPost.imageUrl}
+                                alt={recommendedPost.title}
+                                width={800}
+                                height={400}
+                                className="rounded-t-lg object-cover"
+                                data-ai-hint={recommendedPost.imageHint}
+                              />
+                            <CardHeader>
+                              <CardTitle className="font-headline text-2xl hover:text-primary transition-colors">
+                                <Link href={`/blog/${recommendedPost.slug}`}>{recommendedPost.title}</Link>
+                              </CardTitle>
+                            </CardHeader>
+                            <CardContent className="flex-grow">
+                              <p className="text-muted-foreground line-clamp-3">{recommendedPost.excerpt}</p>
+                            </CardContent>
+                            <CardFooter className="flex flex-col items-start gap-4 border-t border-border/50 pt-6">
+                                <div className="flex items-center gap-4">
+                                     <Avatar className="h-12 w-12">
+                                        <AvatarImage src={recommendedPost.authorImage} alt={recommendedPost.author} data-ai-hint={recommendedPost.authorImageHint}/>
+                                        <AvatarFallback>{recommendedPost.author.charAt(0)}</AvatarFallback>
+                                    </Avatar>
+                                    <div>
+                                        <p className="font-semibold text-foreground">{recommendedPost.author}</p>
+                                        <p className="text-sm text-muted-foreground">{recommendedPost.date}</p>
+                                    </div>
+                                </div>
+                                 <Button asChild variant="link" className="text-accent p-0 mt-2">
+                                    <Link href={`/blog/${recommendedPost.slug}`}>
+                                        Leer más <ArrowRight className="ml-2 h-4 w-4" />
+                                    </Link>
+                                </Button>
+                            </CardFooter>
+                          </Card>
+                    ))}
+                </div>
+            </section>
+        )}
     </div>
   );
 }
