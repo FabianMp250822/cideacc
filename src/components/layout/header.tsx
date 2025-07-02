@@ -38,7 +38,10 @@ export function Header() {
 
 
   return (
-    <header className={cn('sticky top-0 z-50 w-full border-b border-white/10 transition-colors duration-300', isScrolled ? 'bg-background/80 backdrop-blur-sm' : 'bg-transparent')}>
+    <header className={cn(
+      'sticky top-0 z-50 w-full border-b transition-colors duration-300', 
+      isScrolled ? 'bg-background/80 backdrop-blur-sm' : 'bg-background'
+    )}>
       <div className="container mx-auto flex h-20 items-center justify-between px-4 md:px-6">
         <Link href="/" className="flex items-center">
           <Image
@@ -46,6 +49,7 @@ export function Header() {
             alt="CIDEACC Logo"
             width={150}
             height={50}
+            className="invert dark:invert-0"
           />
         </Link>
 

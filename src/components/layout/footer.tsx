@@ -27,6 +27,7 @@ export function Footer() {
                 alt="CIDEACC Logo"
                 width={120}
                 height={40}
+                className="invert dark:invert-0"
               />
             </Link>
             <p className="max-w-xs text-sm text-muted-foreground">

@@ -46,7 +46,7 @@ export default function Home() {
                <div className="inline-block rounded-lg bg-primary/10 px-3 py-1 text-sm text-primary max-w-fit">
                 {t('homepage.hero.badge')}
               </div>
-              <h1 className="font-headline text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl text-primary-foreground">
+              <h1 className="font-headline text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl text-foreground">
                 <span className="block">{t('homepage.hero.title_part1')}</span>
                 <span className="block text-primary">{t('homepage.hero.title_part2')}</span>
               </h1>
@@ -77,11 +77,11 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="features" className="w-full py-12 md:py-24 lg:py-32 bg-secondary/20">
+      <section id="features" className="w-full py-12 md:py-24 lg:py-32 bg-secondary/50">
         <div className="container mx-auto space-y-12 px-4 md:px-6">
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
             <div className="space-y-2">
-              <div className="inline-block rounded-lg bg-secondary px-3 py-1 text-sm">
+              <div className="inline-block rounded-lg bg-primary/10 px-3 py-1 text-sm text-primary">
                 {t('homepage.features.section_title')}
               </div>
               <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-5xl">
@@ -94,7 +94,7 @@ export default function Home() {
           </div>
           <div className="mx-auto grid items-start gap-8 sm:max-w-4xl sm:grid-cols-2 md:gap-12 lg:max-w-5xl lg:grid-cols-3">
             {features.map((feature) => (
-              <Card key={feature.title} className="h-full transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-primary/20">
+              <Card key={feature.title} className="h-full transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-primary/20 bg-card/80 backdrop-blur-sm">
                 <CardHeader className="flex flex-col items-center text-center">
                   {feature.icon}
                   <CardTitle className="mt-4 font-headline text-2xl">{feature.title}</CardTitle>
