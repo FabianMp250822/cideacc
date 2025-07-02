@@ -14,6 +14,11 @@ export function Header() {
   const { t } = useLocalization();
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const navLinks = [
     { href: '/', label: t('navigation.home') },
@@ -39,7 +44,7 @@ export function Header() {
             alt="CIDEACC Logo"
             width={150}
             height={50}
-            className="dark:invert"
+            className={cn(isMounted && "dark:invert")}
           />
         </Link>
 

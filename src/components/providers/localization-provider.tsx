@@ -30,14 +30,17 @@ export function LocalizationProvider({ children }: { children: ReactNode }) {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    // This effect runs *after* the component has mounted on the client.
-    // This prevents a mismatch between the server-rendered HTML and the initial client-render.
-    const browserLang = navigator.language.split('-')[0] as Locale;
-    if (browserLang === 'en' || browserLang === 'es') {
-      setLocale(browserLang);
-    }
     setIsMounted(true);
   }, []);
+
+  useEffect(() => {
+    if (isMounted) {
+      const browserLang = navigator.language.split('-')[0] as Locale;
+      if (browserLang === 'en' || browserLang === 'es') {
+        setLocale(browserLang);
+      }
+    }
+  }, [isMounted]);
 
   const t = useCallback(
     (key: string): string => {

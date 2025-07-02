@@ -4,10 +4,17 @@ import { useLocalization } from '@/hooks/use-localization';
 import { Mail, Phone, Globe } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useState, useEffect } from 'react';
+import { cn } from '@/lib/utils';
 
 export function Footer() {
   const { t } = useLocalization();
   const year = new Date().getFullYear();
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const navLinks = [
     { href: '/about', label: t('navigation.about') },
@@ -27,7 +34,7 @@ export function Footer() {
                 alt="CIDEACC Logo"
                 width={120}
                 height={40}
-                className="dark:invert"
+                className={cn(isMounted && "dark:invert")}
               />
             </Link>
             <p className="max-w-xs text-sm text-primary-foreground/70">
