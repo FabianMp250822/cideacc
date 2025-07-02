@@ -23,8 +23,8 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://cideacc.org'),
   title: 'CIDEACC - Laboratorio de IA para Innovación en Salud',
   description:
-    'CIDEACC, el laboratorio de IA médica de la Clínica de la Costa, lidera la transformación de la salud con inteligencia artificial. Descubre nuestras soluciones.',
-  keywords: ['IA en salud', 'inteligencia artificial médica', 'CIDEACC', 'Clínica de la Costa', 'innovación en salud', 'diagnóstico por IA', 'agentic rag', 'procesamiento de lenguaje natural'],
+    'CIDEACC, el laboratorio de IA médica de la Clínica de la Costa, lidera la transformación de la salud con inteligencia artificial. Descubre nuestras soluciones y lee nuestro blog sobre las últimas tendencias.',
+  keywords: ['IA en salud', 'inteligencia artificial médica', 'CIDEACC', 'Clínica de la Costa', 'innovación en salud', 'diagnóstico por IA', 'agentic rag', 'procesamiento de lenguaje natural', 'blog', 'artículos'],
   openGraph: {
     title: 'CIDEACC - Laboratorio de IA para Innovación en Salud',
     description: 'Transformando la salud con inteligencia artificial. Descubre nuestras soluciones en CIDEACC.',
@@ -46,6 +46,17 @@ export const metadata: Metadata = {
     title: 'CIDEACC - Laboratorio de IA para Innovación en Salud',
     description: 'CIDEACC lidera la transformación de la salud con inteligencia artificial.',
     images: ['https://i.ibb.co/SDrPcVcD/LOGO-CIDEACC-BLANCO-9c097083112aab88a977.png'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
 };
 
