@@ -43,8 +43,8 @@ export default function ImpactSummary() {
   return (
     <Card className="w-full shadow-lg">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2 font-headline text-2xl text-primary">
-          <Sparkles className="text-accent" /> {t('impact.ai_summary.title')}
+        <CardTitle className="flex items-center gap-2 font-headline text-2xl text-foreground">
+          <Sparkles className="text-primary" /> {t('impact.ai_summary.title')}
         </CardTitle>
         <CardDescription>
           {t('impact.ai_summary.description')}
@@ -59,7 +59,7 @@ export default function ImpactSummary() {
             className="min-h-[150px]"
             disabled={isLoading}
           />
-          <Button type="submit" disabled={isLoading || !projectOverview.trim()} className="bg-accent hover:bg-accent/90">
+          <Button type="submit" disabled={isLoading || !projectOverview.trim()}>
             {isLoading ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -75,10 +75,10 @@ export default function ImpactSummary() {
 
         {summary && (
           <div className="mt-6">
-            <h3 className="font-headline text-xl font-semibold text-primary">
+            <h3 className="font-headline text-xl font-semibold text-foreground">
                 {t('impact.ai_summary.result_title')}
             </h3>
-            <Card className="mt-2 bg-primary/5">
+            <Card className="mt-2 bg-secondary/20">
                 <CardContent className="p-6">
                     <p className="text-muted-foreground whitespace-pre-wrap">{summary}</p>
                 </CardContent>

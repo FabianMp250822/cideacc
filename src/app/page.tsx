@@ -18,19 +18,19 @@ export default function Home() {
   
   const features = [
     {
-      icon: <BrainCircuit className="h-10 w-10 text-accent" />,
+      icon: <BrainCircuit className="h-10 w-10 text-primary" />,
       title: t('homepage.features.ai.title'),
       description: t('homepage.features.ai.description'),
       link: '/solutions',
     },
     {
-      icon: <HeartPulse className="h-10 w-10 text-accent" />,
+      icon: <HeartPulse className="h-10 w-10 text-primary" />,
       title: t('homepage.features.impact.title'),
       description: t('homepage.features.impact.description'),
       link: '/impact',
     },
     {
-      icon: <Lightbulb className="h-10 w-10 text-accent" />,
+      icon: <Lightbulb className="h-10 w-10 text-primary" />,
       title: t('homepage.features.innovation.title'),
       description: t('homepage.features.innovation.description'),
       link: '/about',
@@ -39,11 +39,11 @@ export default function Home() {
 
   return (
     <div className="flex flex-col animate-fade-in">
-      <section className="w-full py-24 md:py-32 lg:py-40 bg-gradient-to-br from-secondary via-background to-background">
+      <section className="w-full py-24 md:py-32 lg:py-40 bg-gradient-to-br from-background via-secondary to-background">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid gap-8 lg:grid-cols-2 lg:gap-16 items-center">
             <div className="flex flex-col justify-center space-y-6">
-               <div className="inline-block rounded-lg bg-accent/10 px-3 py-1 text-sm text-accent-foreground font-medium max-w-fit">
+               <div className="inline-block rounded-lg bg-primary/10 px-3 py-1 text-sm text-primary font-medium max-w-fit">
                 {t('homepage.hero.badge')}
               </div>
               <h1 className="font-headline text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl text-foreground">
@@ -56,13 +56,13 @@ export default function Home() {
                <ul className="space-y-3 pt-4">
                 {heroFeatures.map((item, index) => (
                   <li key={index} className="flex items-center gap-3">
-                    <CheckCircle className="h-5 w-5 flex-shrink-0 text-accent-vibrant" />
+                    <CheckCircle className="h-5 w-5 flex-shrink-0 text-primary" />
                     <span className="text-foreground/80 font-medium">{item}</span>
                   </li>
                 ))}
               </ul>
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <Button asChild size="lg" className="bg-accent-vibrant hover:bg-accent-vibrant/90 text-white rounded-full">
+                <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground rounded-full">
                   <Link href="/contact">
                     {t('common.get_in_touch')}
                     <ArrowRight className="ml-2 h-5 w-5" />
@@ -109,7 +109,7 @@ export default function Home() {
             {features.map((feature) => (
               <Card key={feature.title} className="h-full transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl bg-card border shadow-lg">
                 <CardHeader className="flex flex-col items-start">
-                  <div className="p-3 rounded-md bg-accent/10">{feature.icon}</div>
+                  <div className="p-3 rounded-md bg-primary/10">{feature.icon}</div>
                   <CardTitle className="mt-4 font-headline text-2xl">{feature.title}</CardTitle>
                 </CardHeader>
                 <CardContent className="flex flex-col items-start text-left space-y-4">
@@ -129,7 +129,7 @@ export default function Home() {
       <section className="w-full py-20 md:py-28 lg:py-32 bg-secondary">
         <div className="container mx-auto grid items-center justify-center gap-4 px-4 text-center md:px-6">
           <div className="space-y-4">
-            <h2 className="font-headline text-3xl font-bold tracking-tighter text-primary md:text-4xl/tight">
+            <h2 className="font-headline text-3xl font-bold tracking-tighter text-foreground md:text-4xl/tight">
               {t('homepage.cta_section.title')}
             </h2>
             <p className="mx-auto max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
@@ -137,7 +137,7 @@ export default function Home() {
             </p>
           </div>
           <div className="mx-auto w-full max-w-sm space-y-2">
-            <Button asChild size="lg" className="w-full bg-accent-vibrant hover:bg-accent-vibrant/90 text-white rounded-full">
+            <Button asChild size="lg" className="w-full bg-accent hover:bg-accent/90 text-accent-foreground rounded-full">
               <Link href="/contact">
                 {t('common.get_in_touch')}
                 <ArrowRight className="ml-2 h-5 w-5" />

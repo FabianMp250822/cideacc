@@ -10,22 +10,22 @@ export default function SolutionsPage() {
 
   const features = [
     {
-      icon: <FileText className="h-8 w-8 text-accent" />,
+      icon: <FileText className="h-8 w-8 text-primary" />,
       title: t('solutions.features.data_structuring.title'),
       description: t('solutions.features.data_structuring.description'),
     },
     {
-      icon: <BrainCircuit className="h-8 w-8 text-accent" />,
+      icon: <BrainCircuit className="h-8 w-8 text-primary" />,
       title: t('solutions.features.summarization.title'),
       description: t('solutions.features.summarization.description'),
     },
     {
-      icon: <MessagesSquare className="h-8 w-8 text-accent" />,
+      icon: <MessagesSquare className="h-8 w-8 text-primary" />,
       title: t('solutions.features.interactive_consultation.title'),
       description: t('solutions.features.interactive_consultation.description'),
     },
     {
-      icon: <ShieldCheck className="h-8 w-8 text-accent" />,
+      icon: <ShieldCheck className="h-8 w-8 text-primary" />,
       title: t('solutions.features.agentic_rag.title'),
       description: t('solutions.features.agentic_rag.description'),
     },
@@ -41,7 +41,7 @@ export default function SolutionsPage() {
   return (
     <div className="container mx-auto px-4 py-16 md:px-6 md:py-24 lg:py-32 animate-fade-in">
       <header className="text-center space-y-4">
-        <h1 className="font-headline text-4xl font-bold tracking-tight text-primary sm:text-5xl md:text-6xl">
+        <h1 className="font-headline text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl">
           {t('solutions.title')}
         </h1>
         <p className="mx-auto max-w-3xl text-muted-foreground md:text-xl">
@@ -51,7 +51,7 @@ export default function SolutionsPage() {
 
       <section className="mt-20 grid gap-12 lg:grid-cols-2 lg:items-center">
         <div className="order-2 lg:order-1">
-          <h2 className="font-headline text-3xl font-bold text-primary">{t('solutions.description')}</h2>
+          <h2 className="font-headline text-3xl font-bold text-foreground">{t('solutions.description')}</h2>
           <p className="mt-4 text-lg text-muted-foreground">
             {t('solutions.subtitle')}
           </p>
@@ -73,7 +73,7 @@ export default function SolutionsPage() {
           {features.map((feature) => (
             <Card key={feature.title} className="flex flex-col shadow-lg hover:shadow-2xl transition-shadow duration-300">
               <CardHeader className="flex flex-row items-center gap-4">
-                <div className="p-3 rounded-md bg-accent/10">{feature.icon}</div>
+                <div className="p-3 rounded-md bg-primary/10">{feature.icon}</div>
                 <CardTitle className="font-headline text-xl">{feature.title}</CardTitle>
               </CardHeader>
               <CardContent>
@@ -87,7 +87,7 @@ export default function SolutionsPage() {
       <section className="mt-24">
         <Card className="bg-secondary shadow-lg">
             <CardHeader>
-                <CardTitle className="text-center font-headline text-3xl font-bold text-primary">
+                <CardTitle className="text-center font-headline text-3xl font-bold text-foreground">
                     {t('solutions.benefits.title')}
                 </CardTitle>
             </CardHeader>
@@ -95,7 +95,7 @@ export default function SolutionsPage() {
                 <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 max-w-4xl mx-auto">
                     {benefits.map((benefit, index) => (
                         <li key={index} className="flex items-start gap-4">
-                            <Check className="h-6 w-6 flex-shrink-0 text-accent-vibrant mt-1" />
+                            <Check className="h-6 w-6 flex-shrink-0 text-primary mt-1" />
                             <span className="text-muted-foreground text-base">{benefit}</span>
                         </li>
                     ))}

@@ -6,6 +6,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { LocalizationProvider } from '@/components/providers/localization-provider';
+import { ThemeProvider } from '@/components/providers/theme-provider';
 
 const fontBody = Poppins({
   subsets: ['latin'],
@@ -38,14 +39,21 @@ export default function RootLayout({
           fontHeadline.variable
         )}
       >
-        <LocalizationProvider>
-          <div className="relative flex min-h-dvh flex-col bg-background">
-            <Header />
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </div>
-          <Toaster />
-        </LocalizationProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <LocalizationProvider>
+            <div className="relative flex min-h-dvh flex-col bg-background">
+              <Header />
+              <main className="flex-1">{children}</main>
+              <Footer />
+            </div>
+            <Toaster />
+          </LocalizationProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

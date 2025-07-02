@@ -10,19 +10,19 @@ export default function ContactPage() {
 
   const contactDetails = [
     {
-      icon: <Mail className="h-6 w-6 text-accent" />,
+      icon: <Mail className="h-6 w-6 text-primary" />,
       label: 'Email',
       value: 'maroca@clinicadelacosta.co',
       href: 'mailto:maroca@clinicadelacosta.co',
     },
     {
-      icon: <Phone className="h-6 w-6 text-accent" />,
+      icon: <Phone className="h-6 w-6 text-primary" />,
       label: 'Phone',
       value: '+57 320 801 5489',
       href: 'tel:+573208015489',
     },
     {
-      icon: <Globe className="h-6 w-6 text-accent" />,
+      icon: <Globe className="h-6 w-6 text-primary" />,
       label: 'Website',
       value: 'cideacc.org',
       href: 'https://cideacc.org',
@@ -32,7 +32,7 @@ export default function ContactPage() {
   return (
     <div className="container mx-auto px-4 py-16 md:px-6 md:py-24 lg:py-32 animate-fade-in">
       <header className="text-center space-y-4">
-        <h1 className="font-headline text-4xl font-bold tracking-tight text-primary sm:text-5xl md:text-6xl">
+        <h1 className="font-headline text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl">
           {t('contact.title')}
         </h1>
         <p className="mx-auto max-w-3xl text-muted-foreground md:text-xl">
@@ -47,7 +47,7 @@ export default function ContactPage() {
         <div className="lg:col-span-2">
             <Card className="shadow-lg">
                 <CardHeader>
-                    <CardTitle className="font-headline text-2xl text-primary">{t('contact.direct_info')}</CardTitle>
+                    <CardTitle className="font-headline text-2xl text-foreground">{t('contact.direct_info')}</CardTitle>
                 </CardHeader>
                 <CardContent>
                     <div className="space-y-6">
@@ -60,7 +60,7 @@ export default function ContactPage() {
                             href={detail.href}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-muted-foreground hover:text-accent-vibrant"
+                            className="text-muted-foreground hover:text-primary"
                             >
                             {detail.value}
                             </a>
