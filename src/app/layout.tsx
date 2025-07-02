@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter, Space_Grotesk } from 'next/font/google';
+import { Poppins, Space_Grotesk } from 'next/font/google';
 import './globals.css';
 import { cn } from '@/lib/utils';
 import { Toaster } from '@/components/ui/toaster';
@@ -7,9 +7,10 @@ import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { LocalizationProvider } from '@/components/providers/localization-provider';
 
-const fontBody = Inter({
+const fontBody = Poppins({
   subsets: ['latin'],
   variable: '--font-body',
+  weight: ['400', '500', '600', '700'],
 });
 
 const fontHeadline = Space_Grotesk({
@@ -29,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
           'min-h-screen bg-background font-body antialiased',

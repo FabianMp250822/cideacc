@@ -41,10 +41,10 @@ export default function ImpactSummary() {
   };
 
   return (
-    <Card className="w-full">
+    <Card className="w-full shadow-lg">
       <CardHeader>
         <CardTitle className="flex items-center gap-2 font-headline text-2xl text-primary">
-          <Sparkles /> {t('impact.ai_summary.title')}
+          <Sparkles className="text-accent" /> {t('impact.ai_summary.title')}
         </CardTitle>
         <CardDescription>
           {t('impact.ai_summary.description')}
@@ -79,7 +79,7 @@ export default function ImpactSummary() {
                 {t('impact.ai_summary.result_title')}
             </h3>
             <Card className="mt-2 bg-primary/5">
-                <CardContent className="p-4">
+                <CardContent className="p-6">
                     <p className="text-muted-foreground whitespace-pre-wrap">{summary}</p>
                 </CardContent>
             </Card>

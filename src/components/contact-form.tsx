@@ -66,7 +66,7 @@ export function ContactForm() {
   }
 
   return (
-     <Card>
+     <Card className="shadow-lg">
       <CardHeader>
         <CardTitle className="font-headline text-2xl text-primary">{t('contact.form.message')}</CardTitle>
       </CardHeader>
@@ -138,7 +138,7 @@ export function ContactForm() {
                   </FormItem>
                 )}
               />
-            <Button type="submit" className="w-full bg-accent hover:bg-accent/90" disabled={isLoading}>
+            <Button type="submit" className="w-full bg-accent-vibrant hover:bg-accent-vibrant/90 text-white" disabled={isLoading}>
               {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               {isLoading ? t('common.loading') : t('common.submit')}
             </Button>

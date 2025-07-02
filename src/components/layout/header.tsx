@@ -20,7 +20,6 @@ export function Header() {
     { href: '/about', label: t('navigation.about') },
     { href: '/solutions', label: t('navigation.solutions') },
     { href: '/impact', label: t('navigation.impact') },
-    { href: '/contact', label: t('navigation.contact') },
   ];
 
   useEffect(() => {
@@ -48,8 +47,8 @@ export function Header() {
               key={link.href}
               href={link.href}
               className={cn(
-                'text-sm font-medium transition-colors hover:text-primary-foreground',
-                pathname === link.href ? 'text-primary-foreground' : 'text-primary-foreground/70'
+                'text-sm font-medium transition-colors hover:text-white',
+                pathname === link.href ? 'text-white' : 'text-primary-foreground/70'
               )}
             >
               {link.label}
@@ -59,9 +58,9 @@ export function Header() {
 
         <div className="hidden items-center gap-2 md:flex">
           <LanguageSwitcher />
-          <Button asChild className="bg-accent hover:bg-accent/90 rounded-full">
+          <Button asChild className="bg-accent-vibrant hover:bg-accent-vibrant/90 text-white rounded-full">
              <Link href="/contact">
-              {t('common.get_in_touch')}
+              {t('navigation.contact')}
               <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
           </Button>
@@ -89,8 +88,17 @@ export function Header() {
                 {link.label}
               </Link>
             ))}
+             <Link
+                href="/contact"
+                className={cn(
+                  'text-lg font-medium transition-colors hover:text-primary',
+                  pathname === "/contact" ? 'text-primary' : 'text-foreground'
+                )}
+              >
+                {t('navigation.contact')}
+              </Link>
             <LanguageSwitcher />
-            <Button asChild className="w-full bg-accent hover:bg-accent/90 rounded-full">
+            <Button asChild className="w-full bg-accent-vibrant hover:bg-accent-vibrant/90 text-white rounded-full">
                 <Link href="/contact">
                   {t('common.get_in_touch')}
                   <ArrowRight className="ml-2 h-4 w-4" />

@@ -21,9 +21,9 @@ export default function ImpactPage() {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-12 md:px-6 md:py-16 lg:py-20">
+    <div className="container mx-auto px-4 py-16 md:px-6 md:py-24 lg:py-32 animate-fade-in">
       <header className="text-center space-y-4">
-        <h1 className="font-headline text-4xl font-bold tracking-tighter text-primary sm:text-5xl md:text-6xl">
+        <h1 className="font-headline text-4xl font-bold tracking-tight text-primary sm:text-5xl md:text-6xl">
           {t('impact.title')}
         </h1>
         <p className="mx-auto max-w-3xl text-muted-foreground md:text-xl">
@@ -31,24 +31,24 @@ export default function ImpactPage() {
         </p>
       </header>
       
-      <section className="mt-16">
+      <section className="mt-20">
         <ImpactSummary />
       </section>
 
-      <section className="mt-16">
+      <section className="mt-20">
         <div className="grid gap-12 md:grid-cols-2">
-          <Card>
+          <Card className="shadow-lg hover:shadow-2xl transition-shadow duration-300">
             <CardHeader>
               <CardTitle className="flex items-center gap-3 font-headline text-2xl text-primary">
-                <BarChart />
+                <BarChart className="text-accent" />
                 {t('impact.organizational_results.title')}
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <ul className="space-y-3">
+              <ul className="space-y-4">
                 {results.map((item, index) => (
                   <li key={index} className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 flex-shrink-0 text-accent mt-1" />
+                    <CheckCircle className="h-5 w-5 flex-shrink-0 text-accent-vibrant mt-1" />
                     <span className="text-muted-foreground">{item}</span>
                   </li>
                 ))}
@@ -56,18 +56,18 @@ export default function ImpactPage() {
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="shadow-lg hover:shadow-2xl transition-shadow duration-300">
             <CardHeader>
               <CardTitle className="flex items-center gap-3 font-headline text-2xl text-primary">
-                <Lightbulb />
+                <Lightbulb className="text-accent" />
                 {t('impact.lessons_learned.title')}
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <ul className="space-y-3">
+              <ul className="space-y-4">
                 {lessons.map((item, index) => (
                   <li key={index} className="flex items-start gap-3">
-                     <CheckCircle className="h-5 w-5 flex-shrink-0 text-accent mt-1" />
+                     <CheckCircle className="h-5 w-5 flex-shrink-0 text-accent-vibrant mt-1" />
                     <span className="text-muted-foreground">{item}</span>
                   </li>
                 ))}
