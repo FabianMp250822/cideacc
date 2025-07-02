@@ -43,6 +43,28 @@ const posts = [
     imageUrl: 'https://placehold.co/800x400.png',
     imageHint: 'dna sequence AI'
   },
+  {
+    slug: 'ia-en-imagenes-medicas',
+    title: 'Avances de la IA en el Análisis de Imágenes Médicas',
+    excerpt: 'Las redes neuronales convolucionales están superando a los expertos humanos en la detección de patologías en radiografías y resonancias magnéticas. ¿Cómo funciona esta tecnología?',
+    author: 'Dra. Maria Paula Aroca',
+    authorImage: 'https://placehold.co/100x100.png',
+    authorImageHint: 'woman doctor',
+    date: '10 de Agosto, 2024',
+    imageUrl: 'https://placehold.co/800x400.png',
+    imageHint: 'brain scan AI'
+  },
+  {
+    slug: 'modelos-de-lenguaje-en-salud',
+    title: 'LLMs en la Salud: Más Allá de los Chatbots',
+    excerpt: 'Desde la transcripción de consultas hasta la generación de informes y el apoyo en la toma de decisiones, los modelos de lenguaje grande (LLMs) están redefiniendo la interacción con los datos clínicos.',
+    author: 'Kanery Camargo',
+    authorImage: 'https://placehold.co/100x100.png',
+    authorImageHint: 'woman developer',
+    date: '01 de Agosto, 2024',
+    imageUrl: 'https://placehold.co/800x400.png',
+    imageHint: 'abstract language graph'
+  }
 ];
 
 

@@ -1,7 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowLeft, ArrowRight, Calendar } from "lucide-react";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { ArrowLeft, Calendar } from "lucide-react";
 import type { Metadata, ResolvingMetadata } from 'next';
 import Image from "next/image";
 import Link from "next/link";
@@ -49,9 +49,33 @@ const posts = [
     authorImage: 'https://placehold.co/100x100.png',
     authorImageHint: 'woman engineer',
     date: '02 de Julio, 2024',
-    imageUrl: 'https://placehold.co/1200x600.png',
+    imageUrl: 'https://placehold.co/800x400.png',
     imageHint: 'dna sequence AI'
   },
+  {
+    slug: 'ia-en-imagenes-medicas',
+    title: 'Avances de la IA en el Análisis de Imágenes Médicas',
+    excerpt: 'Las redes neuronales convolucionales están superando a los expertos humanos en la detección de patologías en radiografías y resonancias magnéticas. ¿Cómo funciona esta tecnología?',
+    content: '<p>Contenido del post sobre imágenes médicas próximamente...</p>',
+    author: 'Dra. Maria Paula Aroca',
+    authorImage: 'https://placehold.co/100x100.png',
+    authorImageHint: 'woman doctor',
+    date: '10 de Agosto, 2024',
+    imageUrl: 'https://placehold.co/800x400.png',
+    imageHint: 'brain scan AI'
+  },
+  {
+    slug: 'modelos-de-lenguaje-en-salud',
+    title: 'LLMs en la Salud: Más Allá de los Chatbots',
+    excerpt: 'Desde la transcripción de consultas hasta la generación de informes y el apoyo en la toma de decisiones, los modelos de lenguaje grande (LLMs) están redefiniendo la interacción con los datos clínicos.',
+    content: '<p>Contenido del post sobre LLMs próximamente...</p>',
+    author: 'Kanery Camargo',
+    authorImage: 'https://placehold.co/100x100.png',
+    authorImageHint: 'woman developer',
+    date: '01 de Agosto, 2024',
+    imageUrl: 'https://placehold.co/800x400.png',
+    imageHint: 'abstract language graph'
+  }
 ];
 
 async function getPostBySlug(slug: string) {
@@ -112,7 +136,7 @@ export default async function BlogPostPage({ params }: Props) {
 
   const recommendedPosts = posts
     .filter(p => p.slug !== params.slug)
-    .slice(0, 2);
+    .slice(0, 4);
 
   return (
     <div className="container mx-auto px-4 py-16 md:px-6 md:py-24 lg:py-32">
@@ -161,45 +185,40 @@ export default async function BlogPostPage({ params }: Props) {
                 <h2 className="text-center font-headline text-3xl font-bold text-foreground mb-12">
                     También te podría interesar
                 </h2>
-                <div className="grid gap-12 lg:grid-cols-2 max-w-4xl mx-auto">
-                    {recommendedPosts.map((recommendedPost) => (
-                        <Card key={recommendedPost.slug} className="flex flex-col bg-card shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
-                             <Image
-                                src={recommendedPost.imageUrl}
-                                alt={recommendedPost.title}
-                                width={800}
-                                height={400}
-                                className="rounded-t-lg object-cover"
-                                data-ai-hint={recommendedPost.imageHint}
-                              />
-                            <CardHeader>
-                              <CardTitle className="font-headline text-2xl hover:text-primary transition-colors">
-                                <Link href={`/blog/${recommendedPost.slug}`}>{recommendedPost.title}</Link>
-                              </CardTitle>
-                            </CardHeader>
-                            <CardContent className="flex-grow">
-                              <p className="text-muted-foreground line-clamp-3">{recommendedPost.excerpt}</p>
-                            </CardContent>
-                            <CardFooter className="flex flex-col items-start gap-4 border-t border-border/50 pt-6">
-                                <div className="flex items-center gap-4">
-                                     <Avatar className="h-12 w-12">
-                                        <AvatarImage src={recommendedPost.authorImage} alt={recommendedPost.author} data-ai-hint={recommendedPost.authorImageHint}/>
-                                        <AvatarFallback>{recommendedPost.author.charAt(0)}</AvatarFallback>
-                                    </Avatar>
-                                    <div>
-                                        <p className="font-semibold text-foreground">{recommendedPost.author}</p>
-                                        <p className="text-sm text-muted-foreground">{recommendedPost.date}</p>
-                                    </div>
-                                </div>
-                                 <Button asChild variant="link" className="text-accent p-0 mt-2">
-                                    <Link href={`/blog/${recommendedPost.slug}`}>
-                                        Leer más <ArrowRight className="ml-2 h-4 w-4" />
+                 <Carousel
+                    opts={{
+                        align: "start",
+                        loop: recommendedPosts.length > 3,
+                    }}
+                    className="w-full max-w-6xl mx-auto"
+                >
+                    <CarouselContent className="-ml-4">
+                        {recommendedPosts.map((recommendedPost) => (
+                            <CarouselItem key={recommendedPost.slug} className="pl-4 md:basis-1/2 lg:basis-1/3">
+                                <Card className="h-full overflow-hidden bg-card shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 flex flex-col group">
+                                    <Link href={`/blog/${recommendedPost.slug}`} className="flex flex-col h-full">
+                                        <div className="relative w-full aspect-video overflow-hidden rounded-t-lg">
+                                            <Image
+                                                src={recommendedPost.imageUrl}
+                                                alt={recommendedPost.title}
+                                                fill
+                                                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                                                data-ai-hint={recommendedPost.imageHint}
+                                            />
+                                        </div>
+                                        <CardHeader className="flex-grow">
+                                            <CardTitle className="font-headline text-xl text-foreground group-hover:text-primary transition-colors line-clamp-2">
+                                                {recommendedPost.title}
+                                            </CardTitle>
+                                        </CardHeader>
                                     </Link>
-                                </Button>
-                            </CardFooter>
-                          </Card>
-                    ))}
-                </div>
+                                </Card>
+                            </CarouselItem>
+                        ))}
+                    </CarouselContent>
+                    <CarouselPrevious className="hidden sm:flex" />
+                    <CarouselNext className="hidden sm:flex" />
+                </Carousel>
             </section>
         )}
     </div>
