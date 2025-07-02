@@ -32,6 +32,7 @@ import Image from 'next/image';
 import type { Post } from '@/types';
 import { collection, onSnapshot } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
+import { cn } from '@/lib/utils';
 
 const formSchema = z.object({
   title: z.string().min(2, 'El título debe tener al menos 2 caracteres.').max(150),
