@@ -24,8 +24,8 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-16 md:px-6 md:py-24 lg:py-32 animate-fade-in">
-      <header className="text-center space-y-4">
+    <div className="container mx-auto px-4 py-16 md:px-6 md:py-24 lg:py-32">
+      <header className="text-center space-y-4 animate-fade-in">
         <h1 className="font-headline text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl">
           {t('about.title')}
         </h1>
@@ -34,7 +34,7 @@ export default function AboutPage() {
         </p>
       </header>
 
-      <div className="mt-20 grid gap-16 lg:grid-cols-2 lg:gap-24">
+      <div className="mt-20 grid gap-16 lg:grid-cols-2 lg:gap-24 animate-fade-in">
         <div className="space-y-6">
           <h2 className="font-headline text-3xl font-bold text-foreground flex items-center gap-3"><Flag className="text-primary"/>{t('about.mission.title')}</h2>
           <p className="text-muted-foreground text-lg">{t('about.mission.text')}</p>
@@ -45,7 +45,7 @@ export default function AboutPage() {
         </div>
       </div>
 
-       <section className="mt-24 bg-secondary py-20 rounded-xl">
+       <section className="mt-24 bg-secondary py-20 rounded-xl animate-fade-in">
          <div className="container mx-auto">
             <div className="text-center">
               <h2 className="font-headline text-3xl font-bold text-foreground flex items-center justify-center gap-3">
@@ -56,7 +56,7 @@ export default function AboutPage() {
          </div>
       </section>
 
-      <section className="mt-24 text-center">
+      <section className="mt-24 text-center animate-fade-in">
         <h2 className="font-headline text-3xl font-bold text-foreground flex items-center justify-center gap-3"><CheckCircle className="text-primary" />{t('about.values.title')}</h2>
         <div className="mt-12 grid grid-cols-2 gap-y-10 gap-x-8 md:grid-cols-3 lg:grid-cols-5">
             {values.map((value, index) => (
@@ -68,7 +68,7 @@ export default function AboutPage() {
         </div>
       </section>
       
-      <section className="mt-24">
+      <section className="mt-24 animate-fade-in">
         <h2 className="text-center font-headline text-3xl font-bold text-foreground flex items-center justify-center gap-3"><Users className="text-primary" /> {t('about.team.title')}</h2>
         <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3">
           {teamMembers.map((member) => (

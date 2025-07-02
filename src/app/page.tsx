@@ -38,8 +38,8 @@ export default function Home() {
   ];
 
   return (
-    <div className="flex flex-col animate-fade-in">
-      <section className="w-full py-24 md:py-32 lg:py-40 bg-gradient-to-br from-background via-secondary to-background">
+    <div className="flex flex-col">
+      <section className="w-full py-24 md:py-32 lg:py-40 bg-gradient-to-br from-background via-secondary to-background animate-fade-in">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid gap-8 lg:grid-cols-2 lg:gap-16 items-center">
             <div className="flex flex-col justify-center space-y-6">
@@ -90,7 +90,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="features" className="w-full py-20 md:py-28 lg:py-32 bg-background">
+      <section id="features" className="w-full py-20 md:py-28 lg:py-32 bg-background animate-fade-in">
         <div className="container mx-auto space-y-16 px-4 md:px-6">
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
             <div className="space-y-3">
@@ -126,7 +126,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="w-full py-20 md:py-28 lg:py-32 bg-secondary">
+      <section className="w-full py-20 md:py-28 lg:py-32 bg-secondary animate-fade-in">
         <div className="container mx-auto grid items-center justify-center gap-4 px-4 text-center md:px-6">
           <div className="space-y-4">
             <h2 className="font-headline text-3xl font-bold tracking-tighter text-foreground md:text-4xl/tight">

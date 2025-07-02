@@ -39,8 +39,8 @@ export default function SolutionsPage() {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-16 md:px-6 md:py-24 lg:py-32 animate-fade-in">
-      <header className="text-center space-y-4">
+    <div className="container mx-auto px-4 py-16 md:px-6 md:py-24 lg:py-32">
+      <header className="text-center space-y-4 animate-fade-in">
         <h1 className="font-headline text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl">
           {t('solutions.title')}
         </h1>
@@ -49,7 +49,7 @@ export default function SolutionsPage() {
         </p>
       </header>
 
-      <section className="mt-20 grid gap-12 lg:grid-cols-2 lg:items-center">
+      <section className="mt-20 grid gap-12 lg:grid-cols-2 lg:items-center animate-fade-in">
         <div className="order-2 lg:order-1">
           <h2 className="font-headline text-3xl font-bold text-foreground">{t('solutions.description')}</h2>
           <p className="mt-4 text-lg text-muted-foreground">
@@ -68,7 +68,7 @@ export default function SolutionsPage() {
         </div>
       </section>
 
-      <section className="mt-24">
+      <section className="mt-24 animate-fade-in">
         <div className="grid gap-8 md:grid-cols-2">
           {features.map((feature) => (
             <Card key={feature.title} className="flex flex-col shadow-lg hover:shadow-2xl transition-shadow duration-300">
@@ -84,7 +84,7 @@ export default function SolutionsPage() {
         </div>
       </section>
 
-      <section className="mt-24">
+      <section className="mt-24 animate-fade-in">
         <Card className="bg-secondary shadow-lg">
             <CardHeader>
                 <CardTitle className="text-center font-headline text-3xl font-bold text-foreground">

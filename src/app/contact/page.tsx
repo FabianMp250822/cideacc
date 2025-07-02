@@ -30,8 +30,8 @@ export default function ContactPage() {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-16 md:px-6 md:py-24 lg:py-32 animate-fade-in">
-      <header className="text-center space-y-4">
+    <div className="container mx-auto px-4 py-16 md:px-6 md:py-24 lg:py-32">
+      <header className="text-center space-y-4 animate-fade-in">
         <h1 className="font-headline text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl">
           {t('contact.title')}
         </h1>
@@ -40,7 +40,7 @@ export default function ContactPage() {
         </p>
       </header>
 
-      <div className="mt-20 grid gap-12 lg:grid-cols-5 lg:gap-16">
+      <div className="mt-20 grid gap-12 lg:grid-cols-5 lg:gap-16 animate-fade-in">
         <div className="lg:col-span-3">
           <ContactForm />
         </div>

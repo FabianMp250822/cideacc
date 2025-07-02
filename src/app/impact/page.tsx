@@ -21,8 +21,8 @@ export default function ImpactPage() {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-16 md:px-6 md:py-24 lg:py-32 animate-fade-in">
-      <header className="text-center space-y-4">
+    <div className="container mx-auto px-4 py-16 md:px-6 md:py-24 lg:py-32">
+      <header className="text-center space-y-4 animate-fade-in">
         <h1 className="font-headline text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl">
           {t('impact.title')}
         </h1>
@@ -31,11 +31,11 @@ export default function ImpactPage() {
         </p>
       </header>
       
-      <section className="mt-20">
+      <section className="mt-20 animate-fade-in">
         <ImpactSummary />
       </section>
 
-      <section className="mt-20">
+      <section className="mt-20 animate-fade-in">
         <div className="grid gap-12 md:grid-cols-2">
           <Card className="shadow-lg hover:shadow-2xl transition-shadow duration-300">
             <CardHeader>
