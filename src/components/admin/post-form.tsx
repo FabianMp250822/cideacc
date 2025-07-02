@@ -103,6 +103,19 @@ export function PostForm({ postToEdit }: PostFormProps) {
   };
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    const imageInput = document.getElementById('featuredImage') as HTMLInputElement;
+    const imageFile = imageInput?.files?.[0];
+
+    // Pre-flight check: If it's a new post, an image is absolutely required.
+    if (!postToEdit && !imageFile) {
+        toast({
+            title: 'Error de validación',
+            description: 'La imagen destacada es requerida para crear una nueva publicación.',
+            variant: 'destructive',
+        });
+        return;
+    }
+
     setIsLoading(true);
     let uploadedImageUrl: string | null = null;
 
@@ -124,9 +137,7 @@ export function PostForm({ postToEdit }: PostFormProps) {
       showToast('Paso 2/4: Categoría procesada ✓');
 
       let finalImageUrl = postToEdit?.featuredImageUrl || '';
-      const imageInput = document.getElementById('featuredImage') as HTMLInputElement;
-      const imageFile = imageInput?.files?.[0];
-
+      
       // Step 3: Upload Image if provided
       if (imageFile) {
         showToast('Paso 3/4: Subiendo imagen destacada...');
@@ -140,7 +151,8 @@ export function PostForm({ postToEdit }: PostFormProps) {
       }
 
       if (!finalImageUrl) {
-        throw new Error('La imagen destacada es requerida.');
+        // This case should now only be reachable if something went wrong during upload
+        throw new Error('No se pudo obtener la URL de la imagen destacada.');
       }
 
       // Step 4: Save post data to Firestore

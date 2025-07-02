@@ -54,9 +54,14 @@ export async function uploadImage(image: File): Promise<string> {
     throw new Error('Usuario no autenticado para subir imagen.');
   }
   const storageRef = ref(storage, `posts/${Date.now()}_${image.name}`);
-  await uploadBytes(storageRef, image);
-  const downloadURL = await getDownloadURL(storageRef);
-  return downloadURL;
+  try {
+    await uploadBytes(storageRef, image);
+    const downloadURL = await getDownloadURL(storageRef);
+    return downloadURL;
+  } catch (error) {
+    console.error("Firebase Storage upload error: ", error);
+    throw new Error("Error al subir la imagen. Revisa la configuración de Firebase Storage y los permisos de CORS.");
+  }
 }
 
 // Step 3: Create Post Document in Firestore
