@@ -22,7 +22,7 @@ export function Footer() {
   ];
 
   return (
-    <footer className="bg-secondary text-secondary-foreground">
+    <footer className="bg-background border-t border-border/20">
       <div className="container mx-auto px-4 py-12 md:px-6">
         <div className="grid gap-12 lg:grid-cols-3 lg:gap-8">
           {/* Logo and Tagline */}
@@ -58,17 +58,17 @@ export function Footer() {
               <h3 className="font-headline text-lg font-semibold text-foreground">{t('contact.direct_info')}</h3>
               <ul className="mt-4 space-y-3 text-sm">
                 <li className="flex items-center gap-3">
-                  <Mail className="h-4 w-4 text-primary" />
+                  <Mail className="h-4 w-4 text-accent" />
                   <a href="mailto:maroca@clinicadelacosta.co" className="text-muted-foreground transition-colors hover:text-foreground">
                     maroca@clinicadelacosta.co
                   </a>
                 </li>
                 <li className="flex items-center gap-3">
-                  <Phone className="h-4 w-4 text-primary" />
+                  <Phone className="h-4 w-4 text-accent" />
                   <span className="text-muted-foreground">+57 320 801 5489</span>
                 </li>
                 <li className="flex items-center gap-3">
-                  <Globe className="h-4 w-4 text-primary" />
+                  <Globe className="h-4 w-4 text-accent" />
                   <a href="https://cideacc.org" target="_blank" rel="noopener noreferrer" className="text-muted-foreground transition-colors hover:text-foreground">
                     cideacc.org
                   </a>
@@ -77,16 +77,22 @@ export function Footer() {
             </div>
              <div>
               <h3 className="font-headline text-lg font-semibold text-foreground">{t('footer.credits.title')}</h3>
-               <p className="mt-4 text-sm text-muted-foreground">
-                {t('footer.credits.text')}
-              </p>
+               <ul className="mt-4 space-y-2 text-sm">
+                <li className="text-muted-foreground">
+                  {t('footer.credits.developer')}: Fabian Muñoz Puello
+                </li>
+                <li className="text-muted-foreground">
+                  {t('footer.credits.designer')}: Leidy Vega Anaya
+                </li>
+              </ul>
             </div>
           </div>
         </div>
         
         {/* Copyright */}
-        <div className="mt-12 border-t border-border pt-8 text-center text-sm text-muted-foreground">
+        <div className="mt-12 border-t border-border/50 pt-8 text-center text-sm text-muted-foreground space-y-2">
           <p>&copy; {year} CIDEACC. {t('footer.all_rights_reserved')}</p>
+          <p>{t('footer.developed_by')}</p>
         </div>
       </div>
     </footer>

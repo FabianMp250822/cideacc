@@ -159,8 +159,10 @@
     "tagline": "Digitally transforming healthcare with innovative and secure AI solutions.",
     "credits": {
       "title": "Credits",
-      "text": "Built with passion using open-source tools and the collaboration of a great team."
+      "developer": "Developer",
+      "designer": "Designer"
     },
-    "all_rights_reserved": "All rights reserved."
+    "all_rights_reserved": "All rights reserved.",
+    "developed_by": "Developed by Tecnosalud Internacional SAS"
   }
 }
