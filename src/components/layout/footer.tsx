@@ -23,12 +23,13 @@ export function Footer() {
           <div className="flex flex-col space-y-4">
             <Link href="/" className="flex items-center gap-2">
               <Image
-                src="https://i.ibb.co/SDrPcVcD/LOGO-CIDEACC-BLANCO-9c097083112aab88a977.png"
+                src="https://placehold.co/40x40.png"
                 alt="CIDEACC Logo"
-                width={150}
+                width={35}
                 height={35}
-                className="invert dark:invert-0"
+                data-ai-hint="heart circuit"
               />
+              <span className="font-bold text-lg text-primary">CIDEACC</span>
             </Link>
             <p className="max-w-xs text-sm text-muted-foreground">
               {t('footer.tagline')}

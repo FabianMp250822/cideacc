@@ -42,12 +42,13 @@ export function Header() {
       <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
         <Link href="/" className="flex items-center gap-2">
           <Image
-            src="https://i.ibb.co/SDrPcVcD/LOGO-CIDEACC-BLANCO-9c097083112aab88a977.png"
+            src="https://placehold.co/40x40.png"
             alt="CIDEACC Logo"
-            width={150}
+            width={35}
             height={35}
-            className="invert dark:invert-0"
+            data-ai-hint="heart circuit"
           />
+          <span className="font-bold text-lg text-primary">CIDEACC</span>
         </Link>
 
         <nav className="hidden items-center gap-6 md:flex">
