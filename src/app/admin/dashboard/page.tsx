@@ -25,7 +25,7 @@ import { Badge } from '@/components/ui/badge';
 import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import type { Post } from '@/types';
-import { deletePost } from '@/lib/actions';
+import { deletePost } from '@/lib/client-actions';
 import { useToast } from '@/hooks/use-toast';
 import {
   AlertDialog,

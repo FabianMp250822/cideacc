@@ -17,7 +17,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { useLocalization } from '@/hooks/use-localization';
 import { useState } from 'react';
-import { sendContactMessage } from '@/lib/actions';
+import { sendContactMessage } from '@/lib/client-actions';
 import { Loader2 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Checkbox } from './ui/checkbox';
