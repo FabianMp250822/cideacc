@@ -11,6 +11,7 @@
     "about": "Quiénes Somos",
     "solutions": "Soluciones",
     "impact": "Impacto",
+    "blog": "Blog",
     "contact": "Contacto"
   },
   "homepage": {
@@ -154,6 +155,10 @@
       "error_description": "Hubo un problema al enviar tu mensaje. Por favor, inténtalo de nuevo."
     },
     "direct_info": "Información Directa"
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Descubre nuestros últimos artículos, noticias e ideas sobre IA en la salud."
   },
   "footer": {
     "tagline": "Transformando digitalmente la salud con soluciones de IA innovadoras y seguras.",

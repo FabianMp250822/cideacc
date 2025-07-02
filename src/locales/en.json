@@ -11,6 +11,7 @@
     "about": "About Us",
     "solutions": "Solutions",
     "impact": "Impact",
+    "blog": "Blog",
     "contact": "Contact"
   },
   "homepage": {
@@ -154,6 +155,10 @@
       "error_description": "There was a problem sending your message. Please try again."
     },
     "direct_info": "Direct Information"
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Discover our latest articles, news, and insights on AI in healthcare."
   },
   "footer": {
     "tagline": "Digitally transforming healthcare with innovative and secure AI solutions.",

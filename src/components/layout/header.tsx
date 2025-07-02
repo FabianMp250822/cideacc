@@ -23,6 +23,7 @@ export function Header() {
     { href: '/about', label: t('navigation.about') },
     { href: '/solutions', label: t('navigation.solutions') },
     { href: '/impact', label: t('navigation.impact') },
+    { href: '/blog', label: t('navigation.blog') },
   ];
   
   useEffect(() => {
@@ -39,7 +40,7 @@ export function Header() {
 
   return (
     <header className={cn(
-      'sticky top-0 z-50 w-full border-b bg-background text-foreground border-border'
+      'sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-sm border-border'
     )}>
       <div className="container mx-auto flex h-20 items-center justify-between px-4 md:px-6">
         <Link href="/" className="flex items-center">

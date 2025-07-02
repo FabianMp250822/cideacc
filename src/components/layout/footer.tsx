@@ -18,6 +18,7 @@ export function Footer() {
     { href: '/about', label: t('navigation.about') },
     { href: '/solutions', label: t('navigation.solutions') },
     { href: '/impact', label: t('navigation.impact') },
+    { href: '/blog', label: t('navigation.blog') },
     { href: '/contact', label: t('navigation.contact') },
   ];
 
