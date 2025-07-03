@@ -43,3 +43,157 @@
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
+
+/* Estilos para el contenido de los posts */
+.prose {
+  max-width: none !important;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  margin-top: 2em;
+  margin-bottom: 0.75em;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+}
+
+.prose h1 {
+  font-size: 2.5em;
+}
+
+.prose h2 {
+  font-size: 2em;
+}
+
+.prose h3 {
+  font-size: 1.5em;
+}
+
+.prose p {
+  margin-bottom: 1.25em;
+  line-height: 1.7;
+}
+
+.prose ul,
+.prose ol {
+  margin-bottom: 1.25em;
+  padding-left: 1.5em;
+}
+
+.prose li {
+  margin-bottom: 0.5em;
+}
+
+.prose blockquote {
+  margin: 1.5em 0;
+  padding-left: 1.5em;
+  border-left: 4px solid hsl(var(--primary));
+  font-style: italic;
+  background-color: hsl(var(--muted));
+  padding: 1em 1.5em;
+  border-radius: 8px;
+}
+
+.prose img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin: 2em 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.prose table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 2em 0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.prose table td,
+.prose table th {
+  border: 1px solid hsl(var(--border));
+  padding: 12px 16px;
+  text-align: left;
+}
+
+.prose table th {
+  background-color: hsl(var(--muted));
+  font-weight: 600;
+  color: hsl(var(--foreground));
+}
+
+.prose table tr:nth-child(even) {
+  background-color: hsl(var(--muted) / 0.3);
+}
+
+.prose strong {
+  font-weight: 600;
+  color: hsl(var(--foreground));
+}
+
+.prose em {
+  font-style: italic;
+}
+
+.prose a {
+  color: hsl(var(--primary));
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.prose a:hover {
+  color: hsl(var(--primary) / 0.8);
+}
+
+.prose code {
+  background-color: hsl(var(--muted));
+  padding: 3px 6px;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9em;
+  color: hsl(var(--foreground));
+}
+
+.prose pre {
+  background-color: hsl(var(--muted));
+  padding: 1.5em;
+  border-radius: 12px;
+  overflow-x: auto;
+  margin: 2em 0;
+  border: 1px solid hsl(var(--border));
+}
+
+.prose pre code {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+}
+
+.prose hr {
+  border: none;
+  height: 1px;
+  background-color: hsl(var(--border));
+  margin: 3em 0;
+}
+
+/* Estilos para listas anidadas */
+.prose ul ul,
+.prose ol ol,
+.prose ul ol,
+.prose ol ul {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+/* Estilos para texto resaltado */
+.prose mark {
+  background-color: hsl(var(--primary) / 0.2);
+  padding: 2px 4px;
+  border-radius: 3px;
+}

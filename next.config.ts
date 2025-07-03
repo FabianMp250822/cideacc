@@ -9,27 +9,30 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
+    domains: [
+      'placehold.co',
+      'storage.googleapis.com',
+      'firebasestorage.googleapis.com',
+      'i.ibb.co'
+    ],
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'placehold.co',
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'i.ibb.co',
-        port: '',
+        hostname: 'storage.googleapis.com',
         pathname: '/**',
       },
       {
         protocol: 'https',
         hostname: 'firebasestorage.googleapis.com',
-        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'i.ibb.co',
         pathname: '/**',
       }
-    ],
-  },
+    ]
+  }
 };
 
 export default nextConfig;

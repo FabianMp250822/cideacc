@@ -8,14 +8,81 @@ import Link from "next/link";
 import { getPostBySlug, getPublishedPosts } from "@/lib/actions";
 
 type Props = {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
+
+// Función helper para formatear fechas y obtener ISO string
+const getDateTimeString = (dateValue: any): string | undefined => {
+  if (!dateValue) return undefined;
+  
+  try {
+    let date: Date;
+    
+    if (typeof dateValue === 'string') {
+      date = new Date(dateValue);
+    } else if (dateValue && typeof dateValue.toDate === 'function') {
+      date = dateValue.toDate();
+    } else if (dateValue instanceof Date) {
+      date = dateValue;
+    } else if (typeof dateValue === 'number') {
+      date = new Date(dateValue);
+    } else {
+      return undefined;
+    }
+    
+    // Verificar que la fecha es válida
+    if (isNaN(date.getTime())) {
+      return undefined;
+    }
+    
+    return date.toISOString();
+  } catch (error) {
+    console.error('Error getting datetime string:', error);
+    return undefined;
+  }
+};
+
+// Función helper para formatear fechas para mostrar
+const formatDate = (dateValue: any): string => {
+  if (!dateValue) return 'Fecha no disponible';
+  
+  try {
+    let date: Date;
+    
+    if (typeof dateValue === 'string') {
+      date = new Date(dateValue);
+    } else if (dateValue && typeof dateValue.toDate === 'function') {
+      date = dateValue.toDate();
+    } else if (dateValue instanceof Date) {
+      date = dateValue;
+    } else if (typeof dateValue === 'number') {
+      date = new Date(dateValue);
+    } else {
+      return 'Fecha inválida';
+    }
+    
+    if (isNaN(date.getTime())) {
+      return 'Fecha inválida';
+    }
+    
+    return date.toLocaleDateString('es-ES', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  } catch (error) {
+    console.error('Error formatting date:', error);
+    return 'Fecha inválida';
+  }
+};
 
 export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const post = await getPostBySlug(params.slug);
+  // Await params para Next.js 15
+  const { slug } = await params;
+  const post = await getPostBySlug(slug);
 
   if (!post) {
     return {
@@ -45,7 +112,9 @@ export async function generateMetadata(
 }
 
 export default async function BlogPostPage({ params }: Props) {
-  const post = await getPostBySlug(params.slug);
+  // Await params para Next.js 15
+  const { slug } = await params;
+  const post = await getPostBySlug(slug);
   const allPosts = await getPublishedPosts();
   
   if (!post) {
@@ -61,8 +130,11 @@ export default async function BlogPostPage({ params }: Props) {
   }
 
   const recommendedPosts = allPosts
-    .filter(p => p.slug !== params.slug)
+    .filter(p => p.slug !== slug)
     .slice(0, 4);
+
+  // Obtener el dateTime string de forma segura
+  const dateTimeString = getDateTimeString(post.createdAt);
 
   return (
     <div className="container mx-auto px-4 py-16 md:px-6 md:py-24 lg:py-32">
@@ -85,7 +157,9 @@ export default async function BlogPostPage({ params }: Props) {
                     </div>
                     <div className="flex items-center gap-2">
                         <Calendar className="h-5 w-5" />
-                        <time dateTime={post.createdAt?.toDate().toISOString()}>{post.createdAt?.toDate().toLocaleDateString()}</time>
+                        <time dateTime={dateTimeString}>
+                          {formatDate(post.createdAt)}
+                        </time>
                     </div>
                 </div>
             </header>
@@ -100,8 +174,15 @@ export default async function BlogPostPage({ params }: Props) {
                 data-ai-hint={'technology abstract'}
               />
 
+            {/* Contenido mejorado para mostrar HTML rico */}
             <div
-                className="prose-lg max-w-none text-muted-foreground space-y-6 animate-fade-in"
+                className="prose prose-lg max-w-none animate-fade-in"
+                style={{
+                  fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+                  fontSize: '18px',
+                  lineHeight: '1.7',
+                  color: 'hsl(var(--foreground))',
+                }}
                 dangerouslySetInnerHTML={{ __html: post.content }}
             />
         </article>

@@ -14,3 +14,31 @@ export interface Post {
   viewsCount?: number;
   likesCount?: number;
 }
+
+export interface Study {
+  id: string;
+  title: string;
+  description: string;
+  category: 'innovation' | 'impact' | 'research' | 'case-study';
+  pdfUrl: string;
+  thumbnailUrl?: string;
+  author: string;
+  publishDate: string;
+  tags: string[];
+  downloadCount: number;
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface StudyFormData {
+  title: string;
+  description: string;
+  category: Study['category'];
+  pdfUrl: string;
+  thumbnailUrl?: string;
+  author: string;
+  publishDate: string;
+  tags: string[];
+  featured: boolean;
+}

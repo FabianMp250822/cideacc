@@ -7,11 +7,15 @@ import {
   deleteDoc,
   doc,
   getDoc,
+  getDocs,
   serverTimestamp,
   setDoc,
   updateDoc,
+  Timestamp,
 } from 'firebase/firestore';
 import { deleteObject, getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
+import { httpsCallable } from 'firebase/functions';
+import { functions } from '@/lib/firebase';
 import { z } from 'zod';
 
 import { auth, db, storage } from '@/lib/firebase';
@@ -137,4 +141,257 @@ export async function sendContactMessage(data: z.infer<typeof contactSchema>) {
     throw new Error('Datos de contacto inválidos.');
   }
   console.log('Contact message received:', validatedFields.data);
+}
+
+// NEW: Create or Update Post via Firebase Function (Client-side)
+export async function createOrUpdatePostViaFunction(
+  postData: {
+    title: string;
+    excerpt: string;
+    content: string;
+    status: string;
+    category: string;
+    newCategory?: string;
+  },
+  imageFile?: File,
+  postId?: string
+): Promise<{ success: boolean; message: string; postId?: string }> {
+  try {
+    // Prepare the data according to your function's schema
+    const requestData: {
+      postData: {
+        title: string;
+        excerpt: string;
+        content: string;
+        status: 'draft' | 'published';
+        category: string;
+        newCategory?: string;
+      };
+      imageData?: string;
+      imageName?: string;
+      imageType?: string;
+      postId?: string;
+    } = {
+      postData: {
+        title: postData.title,
+        excerpt: postData.excerpt,
+        content: postData.content,
+        status: postData.status as 'draft' | 'published',
+        category: postData.category,
+        newCategory: postData.newCategory,
+      },
+    };
+
+    // Add postId if updating
+    if (postId) {
+      requestData.postId = postId;
+    }
+
+    // Handle image if provided
+    if (imageFile) {
+      // Convert image to base64
+      const imageData = await new Promise<string>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          const result = reader.result as string;
+          // Remove data URL prefix (data:image/jpeg;base64,)
+          const base64 = result.split(',')[1];
+          resolve(base64);
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(imageFile);
+      });
+
+      requestData.imageData = imageData;
+      requestData.imageName = imageFile.name;
+      requestData.imageType = imageFile.type;
+    }
+
+    // Call the Firebase Function
+    const createOrUpdatePostFunction = httpsCallable(functions, 'createOrUpdatePost');
+    const result = await createOrUpdatePostFunction(requestData);
+
+    return result.data as { success: boolean; message: string; postId?: string };
+  } catch (error) {
+    console.error('Error calling Firebase Function:', error);
+    
+    if (error instanceof Error) {
+      return {
+        success: false,
+        message: error.message,
+      };
+    }
+    
+    return {
+      success: false,
+      message: 'Error desconocido al procesar la publicación',
+    };
+  }
+}
+
+// Función para convertir archivo a base64
+export const fileToBase64 = (file: File): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      const base64String = reader.result as string;
+      // Remover el prefijo "data:type/subtype;base64,"
+      const base64Data = base64String.split(',')[1];
+      resolve(base64Data);
+    };
+    reader.onerror = error => reject(error);
+  });
+};
+
+// Función para crear estudio con archivos
+export const createStudyWithFiles = async (
+  studyData: {
+    title: string;
+    description: string;
+    category: string;
+    author: string;
+    publishDate: string;
+    tags: string[];
+    featured: boolean;
+  },
+  pdfFile?: File,
+  thumbnailFile?: File
+) => {
+  try {
+    const createStudyFunction = httpsCallable(functions, 'createStudyWithFiles');
+    
+    const payload: any = {
+      ...studyData,
+    };
+
+    // Convertir archivos a base64 si existen
+    if (pdfFile) {
+      const pdfBase64 = await fileToBase64(pdfFile);
+      payload.pdfFile = {
+        data: pdfBase64,
+        name: pdfFile.name,
+        type: pdfFile.type
+      };
+    }
+
+    if (thumbnailFile) {
+      const thumbnailBase64 = await fileToBase64(thumbnailFile);
+      payload.thumbnailFile = {
+        data: thumbnailBase64,
+        name: thumbnailFile.name,
+        type: thumbnailFile.type
+      };
+    }
+
+    const result = await createStudyFunction(payload);
+    return result.data;
+  } catch (error) {
+    console.error('Error creating study with files:', error);
+    throw error;
+  }
+};
+
+// Función para actualizar estudio con archivos
+export const updateStudyWithFiles = async (
+  studyId: string,
+  studyData: {
+    title: string;
+    description: string;
+    category: string;
+    author: string;
+    publishDate: string;
+    tags: string[];
+    featured: boolean;
+  },
+  pdfFile?: File,
+  thumbnailFile?: File,
+  currentPdfUrl?: string,
+  currentThumbnailUrl?: string
+) => {
+  try {
+    const updateStudyFunction = httpsCallable(functions, 'updateStudyWithFiles');
+    
+    const payload: any = {
+      studyId,
+      ...studyData,
+      currentPdfUrl,
+      currentThumbnailUrl
+    };
+
+    // Convertir archivos a base64 si existen
+    if (pdfFile) {
+      const pdfBase64 = await fileToBase64(pdfFile);
+      payload.pdfFile = {
+        data: pdfBase64,
+        name: pdfFile.name,
+        type: pdfFile.type
+      };
+    }
+
+    if (thumbnailFile) {
+      const thumbnailBase64 = await fileToBase64(thumbnailFile);
+      payload.thumbnailFile = {
+        data: thumbnailBase64,
+        name: thumbnailFile.name,
+        type: thumbnailFile.type
+      };
+    }
+
+    const result = await updateStudyFunction(payload);
+    return result.data;
+  } catch (error) {
+    console.error('Error updating study with files:', error);
+    throw error;
+  }
+};
+
+// Función para eliminar estudio con archivos
+export const deleteStudyWithFiles = async (studyId: string) => {
+  try {
+    const deleteStudyFunction = httpsCallable(functions, 'deleteStudyWithFiles');
+    const result = await deleteStudyFunction({ studyId });
+    return result.data;
+  } catch (error) {
+    console.error('Error deleting study with files:', error);
+    throw error;
+  }
+};
+
+// Nueva función para convertir datos de Firestore a objetos planos
+export function serializeFirestoreData(data: any): any {
+  if (data === null || data === undefined) {
+    return data;
+  }
+
+  if (data instanceof Timestamp) {
+    return data.toDate().toISOString();
+  }
+
+  if (Array.isArray(data)) {
+    return data.map(item => serializeFirestoreData(item));
+  }
+
+  if (typeof data === 'object') {
+    const serialized: any = {};
+    for (const key in data) {
+      if (data.hasOwnProperty(key)) {
+        serialized[key] = serializeFirestoreData(data[key]);
+      }
+    }
+    return serialized;
+  }
+
+  return data;
+}
+
+// Función para obtener posts serializados
+export async function getSerializedPosts() {
+  const postsCollection = collection(db, 'posts');
+  const snapshot = await getDocs(postsCollection);
+  
+  return snapshot.docs.map(doc => ({
+    id: doc.id,
+    ...serializeFirestoreData(doc.data())
+  }));
 }
