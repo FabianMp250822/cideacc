@@ -59,6 +59,10 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  icons: {
+    icon: 'https://i.ibb.co/gFZjmzWn/Screenshot-2025-07-02-222746.png',
+    apple: 'https://i.ibb.co/gFZjmzWn/Screenshot-2025-07-02-222746.png',
+  },
 };
 
 export default function RootLayout({
@@ -66,6 +70,20 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const orgSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    'name': 'CIDEACC',
+    'url': 'https://cideacc.org',
+    'logo': 'https://i.ibb.co/SDrPcVcD/LOGO-CIDEACC-BLANCO-9c097083112aab88a977.png',
+    'contactPoint': {
+      '@type': 'ContactPoint',
+      'telephone': '+57-320-801-5489',
+      'contactType': 'Customer Service',
+    },
+    'sameAs': [], // Social media URLs can be added here
+  };
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body
@@ -75,6 +93,10 @@ export default function RootLayout({
           fontHeadline.variable
         )}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
+        />
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
